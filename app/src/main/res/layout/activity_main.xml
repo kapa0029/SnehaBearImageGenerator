@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/flight_tracker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/flight_tracker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/currency_converter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/currency_converter"
+        app:layout_constraintEnd_toEndOf="@+id/flight_tracker"
+        app:layout_constraintStart_toStartOf="@+id/flight_tracker"
+        app:layout_constraintTop_toBottomOf="@+id/flight_tracker" />
+
+    <Button
+        android:id="@+id/trivia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/trivia"
+        app:layout_constraintEnd_toEndOf="@+id/currency_converter"
+        app:layout_constraintStart_toStartOf="@+id/currency_converter"
+        app:layout_constraintTop_toBottomOf="@+id/currency_converter" />
+
+    <Button
+        android:id="@+id/bear_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/bear_image"
+        app:layout_constraintEnd_toEndOf="@+id/trivia"
+        app:layout_constraintStart_toStartOf="@+id/trivia"
+        app:layout_constraintTop_toBottomOf="@+id/trivia" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
