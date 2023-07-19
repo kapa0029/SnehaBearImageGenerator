@@ -6,44 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/flight_tracker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/flight_tracker"
+    <EditText
+        android:id="@+id/ConvertedMoneyType"
+        android:layout_width="126dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Currency to be converted"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MoneyType" />
+
+    <EditText
+        android:id="@+id/MoneyType"
+        android:layout_width="126dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Currency convert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Amount"
+        android:layout_width="126dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Amount of currency"
+        app:layout_constraintEnd_toStartOf="@+id/MoneyType"
+        app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/currency_converter"
+        android:id="@+id/convert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/currency_converter"
-        app:layout_constraintEnd_toEndOf="@+id/flight_tracker"
-        app:layout_constraintStart_toStartOf="@+id/flight_tracker"
-        app:layout_constraintTop_toBottomOf="@+id/flight_tracker" />
+        android:layout_marginTop="50dp"
+        android:text="convert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConvertedMoneyType" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="126dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="120dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/ConvertedMoneyType"
+        app:layout_constraintHorizontal_bias="0.304"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Amount" />
 
     <Button
-        android:id="@+id/trivia"
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/trivia"
-        app:layout_constraintEnd_toEndOf="@+id/currency_converter"
-        app:layout_constraintStart_toStartOf="@+id/currency_converter"
-        app:layout_constraintTop_toBottomOf="@+id/currency_converter" />
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/convert"
+        app:layout_constraintVertical_bias="0.22" />
 
     <Button
-        android:id="@+id/bear_image"
+        android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/bear_image"
-        app:layout_constraintEnd_toEndOf="@+id/trivia"
-        app:layout_constraintStart_toStartOf="@+id/trivia"
-        app:layout_constraintTop_toBottomOf="@+id/trivia" />
+        android:text="See history"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
