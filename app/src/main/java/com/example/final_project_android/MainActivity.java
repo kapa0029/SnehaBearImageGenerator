@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
 //        binding.bearImage.setOnClickListener(click->
 //                startActivity(new Intent(this, Bear.class)));
 //
-//        binding.flightTracker.setOnClickListener(click->
-//                startActivity(new Intent(this, FlightTracker.class)));
+        binding.flightTracker.setOnClickListener(click->
+                startActivity(new Intent(this, FlightTracker.class)));
 //
 //        binding.trivia.setOnClickListener(click->
 //                startActivity(new Intent(this, Trivia.class)));
