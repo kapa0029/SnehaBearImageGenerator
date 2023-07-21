@@ -27,11 +27,17 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONException;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private TextView resultTextView;
+    private SharedPreferences sharedPreferences;
+    private static final String TEXT_KEY = "text_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +89,24 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         });
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // Retrieve and set the text from SharedPreferences
+        String savedText = sharedPreferences.getString(TEXT_KEY, "");
+        resultTextView.setText(savedText);
 
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Save the text to SharedPreferences
+        String textToSave = resultTextView.getText().toString();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TEXT_KEY, textToSave);
+        editor.apply();
+    }
 
 
     private class ConvertCurrencyTask extends AsyncTask<String, Void, Double> {
