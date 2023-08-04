@@ -27,7 +27,6 @@ public class FlightDetailsFragment extends Fragment {
 
         binding = DetailsLayoutBinding.inflate(inflater, container, false);
 
-
         binding.destinationText.setText( selected.destination );
         binding.terminalText.setText(selected.terminal);
         binding.gateText.setText(selected.gate);
