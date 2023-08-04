@@ -27,6 +27,13 @@
             android:exported="true" >
 
         </activity>
+
+        <activity
+            android:name=".BearSavedImagesActivity"
+            android:exported="true" >
+
+        </activity>
+
     </application>
 
 </manifest>
