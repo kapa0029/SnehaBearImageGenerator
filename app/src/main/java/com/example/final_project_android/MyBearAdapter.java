@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,11 @@ public class MyBearAdapter extends RecyclerView.Adapter<MyBearViewHolder> {
 
     Context context;
     List<BearItemEntity> bearItems;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
 
     public MyBearAdapter(Context context, List<BearItemEntity> bearItems) {
         this.context = context;
@@ -24,8 +30,13 @@ public class MyBearAdapter extends RecyclerView.Adapter<MyBearViewHolder> {
     @NonNull
     @Override
     public MyBearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyBearViewHolder(LayoutInflater.from(context).inflate(R.layout.item_bear_image, parent, false));
+        View itemView = LayoutInflater.from(context).inflate(R.layout.item_bear_image, parent, false);
+        MyBearViewHolder viewHolder = new MyBearViewHolder(itemView);
+        viewHolder.setOnItemClickListener(onItemClickListener); // Set the OnItemClickListener for the ViewHolder
+        return viewHolder;
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull MyBearViewHolder holder, int position) {
@@ -47,4 +58,9 @@ public class MyBearAdapter extends RecyclerView.Adapter<MyBearViewHolder> {
         bearItems.clear();
         notifyDataSetChanged();
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
 }
