@@ -14,18 +14,30 @@ public class Question implements Parcelable {
     private List<String> incorrectAnswers;
     private String correctAnswer;
 
+    private int selectedOptionIndex=-1;
 
 
 
-    public Question(String category, String type, String difficulty, String questionText, String correctAnswer, List<String> incorrectAnswers) {
+
+    public Question(String category, String type, String difficulty, String questionText, String correctAnswer,
+                    List<String> incorrectAnswers, int correctOptionIndex) {
         this.category = category;
         this.type = type;
         this.difficulty = difficulty;
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
         this.incorrectAnswers = incorrectAnswers;
+        this.correctOptionIndex = correctOptionIndex; // Set the correctOptionIndex
     }
 
+
+    public int getSelectedOptionIndex() {
+        return selectedOptionIndex;
+    }
+
+    public void setSelectedOptionIndex(int selectedOptionIndex) {
+        this.selectedOptionIndex = selectedOptionIndex;
+    }
 
     public String getCategory() {
         return category;
@@ -70,6 +82,16 @@ public class Question implements Parcelable {
         }
     };
 
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public List<String> getOptions() {
+        List<String> allOptions = incorrectAnswers;
+        allOptions.add(correctAnswer);
+        return allOptions;
+    }
+
     private Question(Parcel in) {
         category = in.readString();
         type = in.readString();
@@ -80,5 +102,10 @@ public class Question implements Parcelable {
         incorrectAnswers = in.createStringArrayList();
         correctAnswer = in.readString();
     }
+
+    public int getCorrectOptionIndex() {
+        return correctOptionIndex;
+    }
+
 
 }

@@ -120,7 +120,7 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
                                 String category = questionObj.getString("category");
                                 String type = questionObj.getString("type");
                                 String difficulty = questionObj.getString("difficulty");
-                                String question = questionObj.getString("question");
+                                String questionText = questionObj.getString("question");
                                 String correctAnswer = questionObj.getString("correct_answer");
                                 JSONArray incorrectAnswersArray = questionObj.getJSONArray("incorrect_answers");
                                 List<String> incorrectAnswers = new ArrayList<>();
@@ -129,7 +129,9 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
                                     incorrectAnswers.add(incorrectAnswersArray.getString(j));
                                 }
 
-                                Question q = new Question(category, type, difficulty, question, correctAnswer, incorrectAnswers);
+                                int correctOptionIndex = determineCorrectOptionIndex(correctAnswer, incorrectAnswers);
+
+                                Question q = new Question(category, type, difficulty, questionText, correctAnswer, incorrectAnswers, correctOptionIndex);
                                 questionList.add(q);
                             }
                             startQuestionsActivity(selectedTopic, questionList);
@@ -164,6 +166,11 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
         startActivity(intent);
     }
 
+    private int determineCorrectOptionIndex(String correctAnswer, List<String> incorrectAnswers) {
+        List<String> allOptions = new ArrayList<>(incorrectAnswers);
+        allOptions.add(correctAnswer);
+        return allOptions.indexOf(correctAnswer);
+    }
 
 
 }
