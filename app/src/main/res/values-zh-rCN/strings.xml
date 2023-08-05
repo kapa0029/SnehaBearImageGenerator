@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">期末安卓项目</string>
+    <string name="flight_tracker">航班追踪</string>
+    <string name="currency_converter">货币转换</string>
+    <string name="trivia">小问题数据库</string>
+    <string name="bear_image">小熊图像生成器</string>
+    <string name="airport_hint">请输入机场代码</string>
+    <string name="delete_button">从数据库中删除</string>
+    <string name="search_button">搜索</string>
+    <string name="list_button">列出存入数据库中的所有航班</string>
+    <string name="save_button">保存至数据库</string>
+</resources>
