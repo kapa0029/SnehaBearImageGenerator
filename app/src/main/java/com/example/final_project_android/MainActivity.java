@@ -1,16 +1,26 @@
 package com.example.final_project_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.final_project_android.R;
+import com.example.final_project_android.databinding.ActivityHistoryRoomBinding;
 import com.example.final_project_android.databinding.ActivityMainBinding;
+import com.example.final_project_android.databinding.InformationBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
@@ -22,6 +32,10 @@ import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -31,20 +45,54 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-
 public class MainActivity extends AppCompatActivity {
+    HistoryDatabase myDB ;
+   static HistoryDAO myDAO;
+
+    ArrayList<History> allstuff = new ArrayList<>();
 
     private ActivityMainBinding binding;
     private TextView resultTextView;
     private SharedPreferences sharedPreferences;
     private static final String TEXT_KEY = "text_key";
 
+    ActivityHistoryRoomBinding HRbinding;
+
+    RecyclerView recyclerView;
+    RecyclerView.Adapter myAdapter;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+
+        super.onCreateOptionsMenu(menu);
+
+        return true;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        HistoryDatabase db = Room.databaseBuilder(getApplicationContext(), HistoryDatabase.class, "database-name").build();
+        // myDAO = myDB.HDAO();
+        myDB = db; // Assign the created database instance to myDB
+        myDAO = myDB.HDAO();
+
+
+
+
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(binding.toolbar);
+
+
 
         Button convertButton = binding.convert;
         Button saveButton = binding.save;
@@ -69,11 +117,36 @@ public class MainActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
 
 
-            Snackbar snackbar = Snackbar.make(saveButton, "You choose to save", Snackbar.LENGTH_SHORT);
+
+            String cc= binding.ConvertedMoneyType.getText().toString();
+            String on =binding.Amount.getText().toString();
+            String oc =binding.MoneyType.getText().toString();
+            String cn =binding.result.getText().toString();
+
+
+            History history = new History(cc,on,oc,cn);
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(() -> {
+                //myDAO.deleteAllHistory();
+                myDAO.Insert(history);
+                // myDAO.deleteAllHistory();
+
+
+            });
+
+
+
+
+
+
+            Snackbar snackbar = Snackbar.make(saveButton, "@string/You choose to save", Snackbar.LENGTH_SHORT);
             ColorStateList colorStateList = getResources().getColorStateList(R.color.purple);
             snackbar.setBackgroundTintList(colorStateList);
             snackbar.show();
         });
+
+
+
 
 
         historyButton.setOnClickListener(v -> {
@@ -81,10 +154,20 @@ public class MainActivity extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-            builder.setMessage("Do you want to see the history")
-                    .setTitle("See Hisytory?");
+            builder.setMessage("@string/Do you want to see the history")
+                    .setTitle("@string/See Hisytory?");
             builder.setNegativeButton("No",(dialog,cl)->{});
-            builder.setPositiveButton("Yes",(dialog,cl)->{});
+            builder.setPositiveButton("Yes",(dialog,cl)->{
+
+                Intent nextPage = new Intent( this, HistoryRoom.class);
+
+
+
+                startActivity( nextPage);
+
+
+
+            });
             AlertDialog dialog = builder.create();
             dialog.show();
         });
@@ -138,10 +221,7 @@ public class MainActivity extends AppCompatActivity {
                     inputStream.close();
 
                     JSONObject jsonObject = new JSONObject(response.toString());
-                   // JSONObject rates = jsonObject.getJSONObject("data").getJSONObject("rates");
-                    //JSONObject rates = jsonObject.getJSONObject("data").getJSONObject("rates");
-                   //double rate1 = rates.getDouble(moneyType);
-                    //double rate2 = rates.getDouble(convertedMoneyType);
+
 
                     JSONObject ratesObject = jsonObject.getJSONObject("data");
                     double rate1 = ratesObject.getDouble(moneyType);
@@ -160,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-            @Override
+        @Override
         protected void onPostExecute(Double convertedAmount) {
             if (convertedAmount != null) {
                 resultTextView.setText(String.valueOf(convertedAmount));
@@ -168,5 +248,18 @@ public class MainActivity extends AppCompatActivity {
                 resultTextView.setText("Error converting currency");
             }
         }
+    }
+
+   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.help) {
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("Input the currency type(3 letters word) and the number of currency, then click the convert button to get the result" )
+                    .setTitle("Instruction")
+                    .setPositiveButton("yes", (dialog, cl) -> {
+
+                    }).show();
+        }
+        return true;
     }
 }

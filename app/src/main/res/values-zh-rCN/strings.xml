@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">期末项目——安卓</string>
+    <string name="button">按钮</string>
+    <string name="convert">转换</string>
+    <string name="save">保存</string>
+    <string name="history">历史</string>
+</resources>
