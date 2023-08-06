@@ -7,8 +7,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -38,6 +38,17 @@ public class fetchQuestion extends AppCompatActivity {
         showQuestion(currentQuestionIndex);
 
         buttonNext.setOnClickListener(view -> {
+            int checkedRadioButtonId = radioGroupAnswers.getCheckedRadioButtonId();
+            if (checkedRadioButtonId == -1) {
+                // No radio button is selected, show an error message or handle the situation as needed
+                // For example, you can display a Toast message
+                Toast.makeText(this, "Please select an answer before proceeding.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Update the selected option for the current question
+            int selectedOptionIndex = radioGroupAnswers.indexOfChild(findViewById(checkedRadioButtonId));
+            questionList.get(currentQuestionIndex).setSelectedOptionIndex(selectedOptionIndex);
 
             // Handle the Next button click
             if (currentQuestionIndex < questionList.size() - 1) {
@@ -51,22 +62,31 @@ public class fetchQuestion extends AppCompatActivity {
                 // All questions answered, navigate to score/activity result
                 Intent intent = new Intent(fetchQuestion.this, ScoreActivity.class);
                 intent.putExtra("questions", (ArrayList<? extends Parcelable>) questionList);
-                intent.putExtra("correctAnswer",correctAnswers);
+                intent.putExtra("correctAnswer", correctAnswers);
+
                 intent.putExtra("scorePercentage", scorePercentage);
                 startActivity(intent);
             }
         });
     }
+
     private int calculateCorrectAnswers() {
         int correctAnswers = 0;
         for (Question question : questionList) {
             int selectedOptionIndex = question.getSelectedOptionIndex();
-            if (selectedOptionIndex == question.getCorrectOptionIndex()) {
-                correctAnswers++;
+
+            // Check if an option is selected
+            if (selectedOptionIndex != -1) {
+                String selectedOption = question.getOptions().get(selectedOptionIndex);
+
+                if (selectedOption.equals(question.getCorrectAnswer())) {
+                    correctAnswers++;
+                }
             }
         }
         return correctAnswers;
     }
+
 
     private void showQuestion(int questionIndex) {
         Question question = questionList.get(questionIndex);
@@ -83,12 +103,7 @@ public class fetchQuestion extends AppCompatActivity {
             RadioButton radioButton = new RadioButton(this);
             radioButton.setText(option);
             radioGroupAnswers.addView(radioButton);
-            int i=0;
-            if (i == question.getSelectedOptionIndex()) {
-                radioButton.setChecked(true);
-            }
         }
-
 
         // Enable or disable Next button based on user's selection
         buttonNext.setEnabled(false);
@@ -98,7 +113,7 @@ public class fetchQuestion extends AppCompatActivity {
             // Update the selected option for the current question
             int selectedOptionIndex = radioGroupAnswers.indexOfChild(findViewById(checkedId));
             question.setSelectedOptionIndex(selectedOptionIndex);
-
         });
     }
+
 }

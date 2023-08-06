@@ -20,14 +20,14 @@ public class Question implements Parcelable {
 
 
     public Question(String category, String type, String difficulty, String questionText, String correctAnswer,
-                    List<String> incorrectAnswers, int correctOptionIndex) {
+                    List<String> incorrectAnswers) {
         this.category = category;
         this.type = type;
         this.difficulty = difficulty;
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
         this.incorrectAnswers = incorrectAnswers;
-        this.correctOptionIndex = correctOptionIndex; // Set the correctOptionIndex
+
     }
 
 
@@ -108,4 +108,7 @@ public class Question implements Parcelable {
     }
 
 
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
 }

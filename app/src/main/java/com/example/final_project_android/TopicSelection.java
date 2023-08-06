@@ -129,9 +129,9 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
                                     incorrectAnswers.add(incorrectAnswersArray.getString(j));
                                 }
 
-                                int correctOptionIndex = determineCorrectOptionIndex(correctAnswer, incorrectAnswers);
 
-                                Question q = new Question(category, type, difficulty, questionText, correctAnswer, incorrectAnswers, correctOptionIndex);
+
+                                Question q = new Question(category, type, difficulty, questionText, correctAnswer, incorrectAnswers);
                                 questionList.add(q);
                             }
                             startQuestionsActivity(selectedTopic, questionList);
