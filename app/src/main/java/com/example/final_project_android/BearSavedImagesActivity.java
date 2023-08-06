@@ -1,7 +1,9 @@
 package com.example.final_project_android;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class BearSavedImagesActivity extends AppCompatActivity implements MyBearAdapter.OnItemClickListener {
+public class BearSavedImagesActivity extends AppCompatActivity implements MyBearAdapter.OnItemClickListener, MyBearAdapter.OnItemLongClickListener {
 
     private RecyclerView recyclerView;
     private MyBearAdapter adapter;
     private List<BearItemEntity> bearItems;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +30,13 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
         // Retrieve bearItems from the database using the BearItemRepository
         BearItemRepository bearItemRepository = new BearItemRepository(getApplication());
         bearItemRepository.getAllBearItems().observe(this, bearItems -> {
-            // Update the RecyclerView adapter with the retrieved bearItems
-            adapter = new MyBearAdapter(getApplicationContext(), bearItems);
+            this.bearItems = bearItems; // Update the local list of bearItems
 
-            // Set the click listener for RecyclerView items
-            adapter.setOnItemClickListener(this);
-
-            recyclerView.setAdapter(adapter);
-
-            this.bearItems = bearItems;
+            // Initialize the adapter with the retrieved bearItems and bearItemRepository
+            adapter = new MyBearAdapter(getApplicationContext(), bearItems, bearItemRepository);
+            adapter.setOnItemClickListener(this); // Set the click listener for RecyclerView items
+            adapter.setOnItemLongClickListener(this); // Set the long click listener for RecyclerView items
+            recyclerView.setAdapter(adapter); // Set the adapter to the RecyclerView
         });
     }
 
@@ -61,5 +62,21 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null); // Optional: Add to the back stack for back navigation
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+        // Show the AlertDialog for confirmation
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Image")
+                .setMessage("Are you sure you want to delete this image?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Delete the item from the database and update the RecyclerView
+                    adapter.deleteItem(position);
+                    adapter.notifyItemRemoved(position);
+                    Toast.makeText(this, "Image deleted", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

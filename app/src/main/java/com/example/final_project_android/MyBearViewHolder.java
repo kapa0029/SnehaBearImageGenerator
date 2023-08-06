@@ -12,7 +12,7 @@ public class MyBearViewHolder extends RecyclerView.ViewHolder {
     TextView savedWidthView;
     TextView savedHeightView;
     private MyBearAdapter.OnItemClickListener onItemClickListener; // Add this line
-
+    private MyBearAdapter.OnItemLongClickListener onItemLongClickListener; // Add this line
     public MyBearViewHolder(@NonNull View itemView) {
         super(itemView);
         savedImageView = itemView.findViewById(R.id.savedBearImage);
@@ -27,8 +27,21 @@ public class MyBearViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
+        // Add the long click listener to the itemView
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (onItemLongClickListener != null) {
+                    onItemLongClickListener.onItemLongClick(getAdapterPosition());
+                }
+                return true; // Return true to indicate that the long click event is consumed
+            }
+        });
     }
-
+    // Add a setter for the long click listener
+    public void setOnItemLongClickListener(MyBearAdapter.OnItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
     public void setOnItemClickListener(MyBearAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
