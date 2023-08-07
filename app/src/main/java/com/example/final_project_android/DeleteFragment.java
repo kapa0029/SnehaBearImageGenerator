@@ -19,18 +19,18 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class DeleteFragment extends Fragment {
-    RecyclerView.Adapter myAdapter;
+    RecyclerView.Adapter myAdapter1;
     Flight selected;
-    ArrayList<Flight> theFlights;
+    ArrayList<Flight> savedFlights;
     DetailsDeleteBinding binding;
     FlightDAO myDAO;
-    int position;
+    int position1;
 
-    public DeleteFragment(Flight f, ArrayList<Flight> theFlights, int position, RecyclerView.Adapter myAdapter, FlightDAO myDAO) {
+    public DeleteFragment(Flight f, ArrayList<Flight> savedFlights, int position1, RecyclerView.Adapter myAdapter1, FlightDAO myDAO) {
         selected = f;
-        this.theFlights = theFlights;
-        this.position = position;
-        this.myAdapter = myAdapter;
+        this.savedFlights = savedFlights;
+        this.position1 = position1;
+        this.myAdapter1 = myAdapter1;
         this.myDAO = myDAO;
     }
 
@@ -52,19 +52,19 @@ public class DeleteFragment extends Fragment {
                     .setTitle("Question:")
                     .setNegativeButton("No", (dialog, cl) -> { } )
                     .setPositiveButton("Yes", (dialog, cl) -> {
-                        Flight toDelete = theFlights.get(position);
-                        theFlights.remove(position);
-                        myAdapter.notifyItemRemoved(position);
+                        Flight toDelete = savedFlights.get(position1);
+                        savedFlights.remove(position1);
+                        myAdapter1.notifyItemRemoved(position1);
 
                         Executor thread1 = Executors.newSingleThreadExecutor();
                         thread1.execute(() -> {
                             myDAO.deleteFlight(selected);
                         });
 
-                        Snackbar.make(binding.deleteButton, "You deleted flight #" + position, Snackbar.LENGTH_LONG)
+                        Snackbar.make(binding.deleteButton, "You deleted flight #" + position1, Snackbar.LENGTH_LONG)
                                 .setAction("Undo", clk -> {
-                                    theFlights.add(position, toDelete);
-                                    myAdapter.notifyItemInserted(position);
+                                    savedFlights.add(position1, toDelete);
+                                    myAdapter1.notifyItemInserted(position1);
                                     Executor myThread = Executors.newSingleThreadExecutor();
                                     myThread.execute( () -> {
                                         myDAO.insertFlight(toDelete);

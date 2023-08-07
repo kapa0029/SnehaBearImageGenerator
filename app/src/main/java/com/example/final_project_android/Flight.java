@@ -23,8 +23,6 @@ public class Flight {
     @ColumnInfo(name="delay")
     int delay;
 
-//    boolean isSearched;
-
     public Flight(){}
 
     public Flight(String dest, String t, String g, int d){
@@ -49,12 +47,4 @@ public class Flight {
     public int getDelay() {
         return delay;
     }
-
-//    public boolean isSearched() {
-//        return isSearched;
-//    }
-//
-//    public void setSearched(boolean searched) {
-//        isSearched = searched;
-//    }
 }

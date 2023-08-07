@@ -44,8 +44,10 @@ public class FlightTracker extends AppCompatActivity {
     ArrayList<Flight> theFlights;
     ArrayList<Flight> savedFlights;
     int position;
+    int position1;
     SharedPreferences prefs;
     RecyclerView.Adapter myAdapter;
+    RecyclerView.Adapter myAdapter1;
 
     RequestQueue queue = null;
     protected String airportCode;
@@ -96,6 +98,8 @@ public class FlightTracker extends AppCompatActivity {
         myDB = Room.databaseBuilder(getApplicationContext(), FlightDatabase.class, "database-name").build();
         myDAO = myDB.fDAO();
 
+        flightModel = new ViewModelProvider(this).get(FlightTrackerViewModel.class);
+
         myAdapter = new RecyclerView.Adapter<MyViewHolder>() {
             @NonNull
             @Override
@@ -121,35 +125,59 @@ public class FlightTracker extends AppCompatActivity {
             }
         };
 
-        flightModel = new ViewModelProvider(this).get(FlightTrackerViewModel.class);
+        myAdapter1 = new RecyclerView.Adapter<MyViewHolder1>() {
+            @NonNull
+            @Override
+            public MyViewHolder1 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                ItemsLayoutBinding binding = ItemsLayoutBinding.inflate(getLayoutInflater(), parent, false);
+                return new MyViewHolder1( binding.getRoot() );
+            }
 
-        savedFlights = flightModel.savedFlights.getValue();
-        if (savedFlights == null) {
-            flightModel.savedFlights.postValue(savedFlights = new ArrayList<>());
-        }
+            @Override
+            public int getItemViewType(int position1) { return 0; }
+
+            @Override
+            public void onBindViewHolder(@NonNull MyViewHolder1 holder, int position1) {
+                //updates the widgets
+                Flight atThisRow = savedFlights.get(position1);
+                //puts the string in position at theWords TextView
+                holder.destText.setText(atThisRow.destination);
+            }
+
+            @Override
+            public int getItemCount() {
+                return savedFlights.size();
+            }
+        };
+
+//        savedFlights = flightModel.savedFlights.getValue();
+//        if (savedFlights == null) {
+//            flightModel.savedFlights.postValue(savedFlights = new ArrayList<>());
+//        }
         binding.listSavedButton.setOnClickListener( click -> {
-
-            savedFlights.clear();
+            savedFlights = new ArrayList<>();
+//            savedFlights.clear();
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() -> {
                 savedFlights.addAll( myDAO.getAllFlights() ); //Once you get the data from database
                 runOnUiThread( () ->
-                        binding.myRecyclerView.setAdapter( myAdapter )); //You can then load the RecyclerView
-                        myAdapter.notifyDataSetChanged();
+                        binding.myRecyclerView.setAdapter( myAdapter1 )); //You can then load the RecyclerView
+                        myAdapter1.notifyDataSetChanged();
             });
         });
 
         FrameLayout fragmentLocation = findViewById(R.id.fragmentLocation);
         flightModel.selectedFlight.observe(this, newFlightValue -> {
             if (newFlightValue.id == 0) {
-                FlightDetailsFragment flightFragment = new FlightDetailsFragment(newFlightValue, theFlights, position, myAdapter, myDAO);
+                //theFlights, position, myAdapter,
+                FlightDetailsFragment flightFragment = new FlightDetailsFragment(newFlightValue, myDAO);
                 getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentLocation, flightFragment)
                     .addToBackStack("Doesn't matter")
                     .commit();
             } else {
-                DeleteFragment deleteFragment = new DeleteFragment(newFlightValue, theFlights, position, myAdapter, myDAO);
+                DeleteFragment deleteFragment = new DeleteFragment(newFlightValue, savedFlights, position1, myAdapter1, myDAO);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentLocation, deleteFragment)
@@ -157,7 +185,6 @@ public class FlightTracker extends AppCompatActivity {
                         .commit();
             }
         });
-        binding.myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         binding.searchButton.setOnClickListener(click -> {
             theFlights = new ArrayList<>();
@@ -217,6 +244,21 @@ public class FlightTracker extends AppCompatActivity {
             itemView.setOnClickListener( click -> {
                 position = getAdapterPosition();
                 Flight selected = theFlights.get(position);
+                flightModel.selectedFlight.postValue(selected);
+            });
+        }
+    }
+
+    protected class MyViewHolder1 extends RecyclerView.ViewHolder {
+        TextView destText;
+
+        public MyViewHolder1(@NonNull View itemView) {
+            super(itemView);
+            destText = itemView.findViewById(R.id.destinationText);
+            //add click listener to select
+            itemView.setOnClickListener( click -> {
+                position1 = getAdapterPosition();
+                Flight selected = savedFlights.get(position1);
                 flightModel.selectedFlight.postValue(selected);
             });
         }

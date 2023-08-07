@@ -21,6 +21,7 @@ import java.util.concurrent.Executors;
 public class FlightDetailsFragment extends Fragment {
 
     RecyclerView.Adapter myAdapter;
+    RecyclerView.Adapter myAdapter1;
     Flight selected;
     ArrayList<Flight> theFlights;
     ArrayList<Flight> savedFlights;
@@ -29,13 +30,14 @@ public class FlightDetailsFragment extends Fragment {
     int position;
     FlightTrackerViewModel flightModel;
 
-    public FlightDetailsFragment(Flight f, ArrayList<Flight> theFlights, int position, RecyclerView.Adapter myAdapter, FlightDAO myDAO) {
+    public FlightDetailsFragment(Flight f, FlightDAO myDAO) {
         selected = f;
-        this.theFlights = theFlights;
-        this.position = position;
-        this.myAdapter = myAdapter;
+//        this.theFlights = theFlights;
+//        this.position = position;
+//        this.myAdapter = myAdapter;
         this.myDAO = myDAO;
     }
+    //ArrayList<Flight> theFlights, int position, RecyclerView.Adapter myAdapter,
 
     @Nullable
     @Override
@@ -49,12 +51,26 @@ public class FlightDetailsFragment extends Fragment {
         binding.delayText.setText("Delay: " + selected.delay );
 
         binding.saveButton.setOnClickListener( click -> {
-            Toast.makeText(getActivity(), "You just clicked the save button!",
+            Toast.makeText(getActivity(), "You saved the flight!",
                     Toast.LENGTH_LONG).show();
-//            selected.setSearched(false);
             Executor thread1 = Executors.newSingleThreadExecutor();
             thread1.execute(() -> {
-                myDAO.insertFlight(selected);
+//                List<Flight> savedFlights = myDAO.getAllFlights();
+//                boolean isFlightAlreadySaved = false;
+//                for(Flight flight : savedFlights) {
+//                    if(flight.equals(selected)) {
+//                        isFlightAlreadySaved = true;
+//                        break;
+//                    }
+//                }
+//                if (isFlightAlreadySaved){
+//                    getActivity().runOnUiThread( () -> {
+//                        Toast.makeText(getActivity(), "You have already saved the flight! Don't save it again!",
+//                                Toast.LENGTH_LONG).show();
+//                    });
+//                } else {
+                    selected.id = myDAO.insertFlight(selected);
+//                }
             });
         });
 

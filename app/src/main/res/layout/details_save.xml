@@ -10,6 +10,7 @@
 
     <TextView
         android:id="@+id/destinationText"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -20,6 +21,7 @@
 
     <TextView
         android:id="@+id/terminalText"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -30,6 +32,7 @@
 
     <TextView
         android:id="@+id/gateText"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -40,6 +43,7 @@
 
     <TextView
         android:id="@+id/delayText"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
