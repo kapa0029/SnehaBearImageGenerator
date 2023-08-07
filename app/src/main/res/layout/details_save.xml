@@ -52,21 +52,10 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="@string/save_button"
-        app:layout_constraintEnd_toEndOf="@+id/deleteButton"
-        app:layout_constraintStart_toStartOf="@+id/deleteButton"
-        app:layout_constraintTop_toBottomOf="@+id/delayText" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/delete_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.417"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+        app:layout_constraintTop_toBottomOf="@+id/delayText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

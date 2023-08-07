@@ -8,6 +8,7 @@
     <string name="airport_hint">请输入机场代码</string>
     <string name="delete_button">从数据库中删除</string>
     <string name="search_button">搜索</string>
-    <string name="list_button">列出存入数据库中的所有航班</string>
+    <string name="list_button">列出已存航班</string>
     <string name="save_button">保存至数据库</string>
+    <string name="enter_text">请输入机场代码</string>
 </resources>
