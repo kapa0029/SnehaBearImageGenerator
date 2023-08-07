@@ -22,6 +22,9 @@ public class fetchQuestion extends AppCompatActivity {
     private List<Question> questionList;
     private int currentQuestionIndex = 0;
 
+    private List<Integer> userAnswers;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class fetchQuestion extends AppCompatActivity {
 
         // Get the questionList from the intent
         questionList = getIntent().getParcelableArrayListExtra("questions");
+        userAnswers = new ArrayList<>();
 
         textViewQuestion = findViewById(R.id.textViewQuestion);
         radioGroupAnswers = findViewById(R.id.radioGroupAnswers);
@@ -49,6 +53,13 @@ public class fetchQuestion extends AppCompatActivity {
             // Update the selected option for the current question
             int selectedOptionIndex = radioGroupAnswers.indexOfChild(findViewById(checkedRadioButtonId));
             questionList.get(currentQuestionIndex).setSelectedOptionIndex(selectedOptionIndex);
+            userAnswers.add(selectedOptionIndex);
+
+            if (currentQuestionIndex == questionList.size() - 2) {
+                // Change the button text to "Submit" when the user is on the second-to-last question
+                buttonNext.setText("Submit");
+            }
+
 
             // Handle the Next button click
             if (currentQuestionIndex < questionList.size() - 1) {
@@ -62,7 +73,7 @@ public class fetchQuestion extends AppCompatActivity {
                 // All questions answered, navigate to score/activity result
                 Intent intent = new Intent(fetchQuestion.this, ScoreActivity.class);
                 intent.putExtra("questions", (ArrayList<? extends Parcelable>) questionList);
-                intent.putExtra("correctAnswer", correctAnswers);
+                intent.putExtra("userAnswers",(ArrayList<Integer>)userAnswers);
 
                 intent.putExtra("scorePercentage", scorePercentage);
                 startActivity(intent);
@@ -72,8 +83,11 @@ public class fetchQuestion extends AppCompatActivity {
 
     private int calculateCorrectAnswers() {
         int correctAnswers = 0;
-        for (Question question : questionList) {
+
+        for (int i = 0; i < questionList.size(); i++) {
+            Question question = questionList.get(i);
             int selectedOptionIndex = question.getSelectedOptionIndex();
+            int userAnswerIndex = userAnswers.get(i);
 
             // Check if an option is selected
             if (selectedOptionIndex != -1) {
@@ -82,10 +96,15 @@ public class fetchQuestion extends AppCompatActivity {
                 if (selectedOption.equals(question.getCorrectAnswer())) {
                     correctAnswers++;
                 }
+            } else if (userAnswerIndex != -1 && question.getOptions().get(userAnswerIndex).equals(question.getCorrectAnswer())) {
+                // If user had previously answered correctly, count it as correct
+                correctAnswers++;
             }
         }
+
         return correctAnswers;
     }
+
 
 
     private void showQuestion(int questionIndex) {

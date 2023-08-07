@@ -166,11 +166,6 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
         startActivity(intent);
     }
 
-    private int determineCorrectOptionIndex(String correctAnswer, List<String> incorrectAnswers) {
-        List<String> allOptions = new ArrayList<>(incorrectAnswers);
-        allOptions.add(correctAnswer);
-        return allOptions.indexOf(correctAnswer);
-    }
 
 
 }
