@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.final_project_android.data.FlightTrackerViewModel;
 import com.example.final_project_android.databinding.DetailsSaveBinding;
@@ -20,8 +19,6 @@ import java.util.concurrent.Executors;
 
 public class FlightDetailsFragment extends Fragment {
 
-    RecyclerView.Adapter myAdapter;
-    RecyclerView.Adapter myAdapter1;
     Flight selected;
     ArrayList<Flight> theFlights;
     ArrayList<Flight> savedFlights;
@@ -55,22 +52,8 @@ public class FlightDetailsFragment extends Fragment {
                     Toast.LENGTH_LONG).show();
             Executor thread1 = Executors.newSingleThreadExecutor();
             thread1.execute(() -> {
-//                List<Flight> savedFlights = myDAO.getAllFlights();
-//                boolean isFlightAlreadySaved = false;
-//                for(Flight flight : savedFlights) {
-//                    if(flight.equals(selected)) {
-//                        isFlightAlreadySaved = true;
-//                        break;
-//                    }
-//                }
-//                if (isFlightAlreadySaved){
-//                    getActivity().runOnUiThread( () -> {
-//                        Toast.makeText(getActivity(), "You have already saved the flight! Don't save it again!",
-//                                Toast.LENGTH_LONG).show();
-//                    });
-//                } else {
+
                     selected.id = myDAO.insertFlight(selected);
-//                }
             });
         });
 

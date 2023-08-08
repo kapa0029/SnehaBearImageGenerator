@@ -46,8 +46,8 @@ public class FlightTracker extends AppCompatActivity {
     int position;
     int position1;
     SharedPreferences prefs;
-    RecyclerView.Adapter myAdapter;
-    RecyclerView.Adapter myAdapter1;
+    RecyclerView.Adapter searchAdapter;
+    RecyclerView.Adapter listAdapter;
 
     RequestQueue queue = null;
     protected String airportCode;
@@ -56,7 +56,7 @@ public class FlightTracker extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.flight_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_flight, menu);
         return true;
     }
 
@@ -100,7 +100,7 @@ public class FlightTracker extends AppCompatActivity {
 
         flightModel = new ViewModelProvider(this).get(FlightTrackerViewModel.class);
 
-        myAdapter = new RecyclerView.Adapter<MyViewHolder>() {
+        searchAdapter = new RecyclerView.Adapter<MyViewHolder>() {
             @NonNull
             @Override
             public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -125,7 +125,7 @@ public class FlightTracker extends AppCompatActivity {
             }
         };
 
-        myAdapter1 = new RecyclerView.Adapter<MyViewHolder1>() {
+        listAdapter = new RecyclerView.Adapter<MyViewHolder1>() {
             @NonNull
             @Override
             public MyViewHolder1 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -150,10 +150,7 @@ public class FlightTracker extends AppCompatActivity {
             }
         };
 
-//        savedFlights = flightModel.savedFlights.getValue();
-//        if (savedFlights == null) {
-//            flightModel.savedFlights.postValue(savedFlights = new ArrayList<>());
-//        }
+
         binding.listSavedButton.setOnClickListener( click -> {
             savedFlights = new ArrayList<>();
 //            savedFlights.clear();
@@ -161,8 +158,8 @@ public class FlightTracker extends AppCompatActivity {
             thread.execute(() -> {
                 savedFlights.addAll( myDAO.getAllFlights() ); //Once you get the data from database
                 runOnUiThread( () ->
-                        binding.myRecyclerView.setAdapter( myAdapter1 )); //You can then load the RecyclerView
-                        myAdapter1.notifyDataSetChanged();
+                        binding.myRecyclerView.setAdapter( listAdapter )); //You can then load the RecyclerView
+                listAdapter.notifyDataSetChanged();
             });
         });
 
@@ -177,7 +174,7 @@ public class FlightTracker extends AppCompatActivity {
                     .addToBackStack("Doesn't matter")
                     .commit();
             } else {
-                DeleteFragment deleteFragment = new DeleteFragment(newFlightValue, savedFlights, position1, myAdapter1, myDAO);
+                DeleteFragment deleteFragment = new DeleteFragment(newFlightValue, savedFlights, position1, listAdapter, myDAO);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentLocation, deleteFragment)
@@ -221,8 +218,8 @@ public class FlightTracker extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         runOnUiThread(() ->
-                                binding.myRecyclerView.setAdapter(myAdapter));
-                                myAdapter.notifyDataSetChanged();
+                                binding.myRecyclerView.setAdapter(searchAdapter));
+                        searchAdapter.notifyDataSetChanged();
                     },
                     error -> {
                         Toast.makeText(getApplicationContext(), "Connection Failed",

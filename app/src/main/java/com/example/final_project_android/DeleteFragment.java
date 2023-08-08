@@ -19,18 +19,18 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class DeleteFragment extends Fragment {
-    RecyclerView.Adapter myAdapter1;
+    RecyclerView.Adapter listAdapter;
     Flight selected;
     ArrayList<Flight> savedFlights;
     DetailsDeleteBinding binding;
     FlightDAO myDAO;
     int position1;
 
-    public DeleteFragment(Flight f, ArrayList<Flight> savedFlights, int position1, RecyclerView.Adapter myAdapter1, FlightDAO myDAO) {
+    public DeleteFragment(Flight f, ArrayList<Flight> savedFlights, int position1, RecyclerView.Adapter listAdapter, FlightDAO myDAO) {
         selected = f;
         this.savedFlights = savedFlights;
         this.position1 = position1;
-        this.myAdapter1 = myAdapter1;
+        this.listAdapter = listAdapter;
         this.myDAO = myDAO;
     }
 
@@ -54,7 +54,7 @@ public class DeleteFragment extends Fragment {
                     .setPositiveButton("Yes", (dialog, cl) -> {
                         Flight toDelete = savedFlights.get(position1);
                         savedFlights.remove(position1);
-                        myAdapter1.notifyItemRemoved(position1);
+                        listAdapter.notifyItemRemoved(position1);
 
                         Executor thread1 = Executors.newSingleThreadExecutor();
                         thread1.execute(() -> {
@@ -64,7 +64,7 @@ public class DeleteFragment extends Fragment {
                         Snackbar.make(binding.deleteButton, "You deleted flight #" + position1, Snackbar.LENGTH_LONG)
                                 .setAction("Undo", clk -> {
                                     savedFlights.add(position1, toDelete);
-                                    myAdapter1.notifyItemInserted(position1);
+                                    listAdapter.notifyItemInserted(position1);
                                     Executor myThread = Executors.newSingleThreadExecutor();
                                     myThread.execute( () -> {
                                         myDAO.insertFlight(toDelete);
