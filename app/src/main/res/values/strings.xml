@@ -4,4 +4,10 @@
     <string name="currency_converter">Go to Currency Converter</string>
     <string name="trivia">Go to Trivia Question Database</string>
     <string name="bear_image">Go to Bear Image Generator</string>
+    <string name="enter_text">Enter the airport code</string>
+    <string name="airport_hint">Type airport code here</string>
+    <string name="delete_button">DELETE FROM DATABASE</string>
+    <string name="search_button">SEARCH</string>
+    <string name="list_button">LIST</string>
+    <string name="save_button">SAVE TO DATABASE</string>
 </resources>
