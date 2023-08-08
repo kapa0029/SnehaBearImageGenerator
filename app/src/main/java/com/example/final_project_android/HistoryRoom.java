@@ -1,7 +1,11 @@
 package com.example.final_project_android;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -12,8 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.final_project_android.data.MainActivityViewModel;
 import com.example.final_project_android.databinding.InformationBinding;
 import com.example.final_project_android.databinding.ActivityHistoryRoomBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,52 +28,25 @@ import java.util.Timer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-
 public class HistoryRoom extends AppCompatActivity {
 
+    private RecyclerView.Adapter<MyRowHolder> myAdapter;
+    private ActivityHistoryRoomBinding HRbinding;
 
+    private ArrayList<History> allstuff = new ArrayList<>();
 
-    static RecyclerView.Adapter myAdapter;
-    ActivityHistoryRoomBinding HRbinding;
-
-    ArrayList<History> allstuff = new ArrayList<>();
-
-    int currentPosition = 0;
-    Timer timer;
+    private int currentPosition = 0;
+    private Timer timer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-        // HistoryDatabase db = Room.databaseBuilder(getApplicationContext(), HistoryDatabase.class, "database-name").build();
-        // myDAO = myDB.HDAO();
-        // myDB = db; // Assign the created database instance to myDB
-        //  myDAO = myDB.HDAO();
-
-
-
         HRbinding = ActivityHistoryRoomBinding.inflate(getLayoutInflater());
         setContentView(HRbinding.getRoot());
 
-        /*HRbinding.button.setOnClickListener(c -> {
-            Executor thread = Executors.newSingleThreadExecutor();
-            thread.execute(() -> {
-
-                // Fetch all data from the database and populate the allstuff list
-                List<History> histories = MainActivity.myDAO.getAllHistory();
-               // History histories = MainActivity.myDAO.getNewestHistory();
-                allstuff.clear();
-                allstuff.addAll(histories);*/
-
-
-
-        // Update the RecyclerView on the main thread
-        // runOnUiThread(() -> {
-        //HRbinding.recyclerview.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
-        RecyclerView.Adapter<MyRowHolder> myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+        myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -83,17 +63,11 @@ public class HistoryRoom extends AppCompatActivity {
                 holder.ConCurrencyText.setText(obj.ConvertedCurrency);
             }
 
-            public int getItemViewType(int position) {
-                return 0;
-            }
-
             @Override
             public int getItemCount() {
                 return allstuff.size();
             }
-
         };
-
 
         HRbinding.recyclerview.setAdapter(myAdapter);
 
@@ -111,42 +85,58 @@ public class HistoryRoom extends AppCompatActivity {
                     myAdapter.notifyDataSetChanged();
                 });
             });
-
-
-
-            // myAdapter.notifyDataSetChanged();
-            //});
         });
-        // });
 
+        HRbinding.recyclerview.setLayoutManager(new LinearLayoutManager(HistoryRoom.this));
 
-        //myAdapter.notifyDataSetChanged();
-
-
-
-
-        // HRbinding.recyclerview.setAdapter(myAdapter=new RecyclerView.Adapter<MyRowHolder>() {
-        //   });
-        HRbinding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-
+        MainActivityViewModel.selectedMessage.observe(this, (newMessageValue) -> {
+            if (newMessageValue != null) {
+                MessageDetailsFragment chatFragment = new MessageDetailsFragment(newMessageValue);
+                FragmentManager fMgr = getSupportFragmentManager();
+                FragmentTransaction tx = fMgr.beginTransaction();
+                tx.replace(R.id.frameLayout, chatFragment);
+                tx.addToBackStack("");
+                tx.commit();
+            }
+        });
     }
 
+    class MyRowHolder extends RecyclerView.ViewHolder {
+        TextView OriNumText;
+        TextView OriCurrencyText;
+        TextView ConNumText;
+        TextView ConCurrencyText;
 
-}
+        public MyRowHolder(@NonNull View itemView) {
+            super(itemView);
 
+            OriNumText = itemView.findViewById(R.id.OriNum);
+            OriCurrencyText = itemView.findViewById(R.id.OriCurrency);
+            ConNumText = itemView.findViewById(R.id.ConNum);
+            ConCurrencyText = itemView.findViewById(R.id.ConCurrency);
 
+            itemView.setOnClickListener(clk -> {
+                int position = getAbsoluteAdapterPosition();
+                History selected = allstuff.get(position);
+                MainActivityViewModel.selectedMessage.postValue(selected);
+            });
 
-class MyRowHolder extends RecyclerView.ViewHolder {
-    TextView OriNumText;
-    TextView OriCurrencyText;
-    TextView ConNumText;
-    TextView ConCurrencyText;
+            AlertDialog.Builder builder = new AlertDialog.Builder(HistoryRoom.this);
+            builder.setMessage("Do you want to delete the message")
+                    .setTitle("Question:")
+                    .setNegativeButton("No", (dialog, cl) -> {})
+                    .setPositiveButton("Yes", (dialog, cl) -> {
+                        int position = getAbsoluteAdapterPosition();
+                        History removedMessage = allstuff.get(position);
+                        allstuff.remove(position);
+                        myAdapter.notifyItemRemoved(position);
 
-    public MyRowHolder(@NonNull View itemView) {
-        super(itemView);
-        OriNumText=itemView.findViewById(R.id.OriNum);
-        OriCurrencyText=itemView.findViewById(R.id.OriCurrency);
-        ConNumText=itemView.findViewById(R.id.ConNum);
-        ConCurrencyText=itemView.findViewById(R.id.ConCurrency);
+                        Snackbar.make(OriNumText, "You deleted message #" + position, Snackbar.LENGTH_LONG)
+                                .setAction("Undo", ck -> {
+                                    allstuff.add(position, removedMessage);
+                                    myAdapter.notifyItemInserted(position);
+                                }).show();
+                    }).create().show();
+        }
     }
 }
