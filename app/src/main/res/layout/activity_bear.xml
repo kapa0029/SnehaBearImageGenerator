@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Bear">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bearToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#657756"
+        android:elevation="4dp"
+        app:titleTextColor="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_bear"/>
     <EditText
         android:id="@+id/widthTextField"
         android:layout_width="145dp"
@@ -75,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/bearToolbar" />
 
     <ImageView
         android:id="@+id/bear_image_view"

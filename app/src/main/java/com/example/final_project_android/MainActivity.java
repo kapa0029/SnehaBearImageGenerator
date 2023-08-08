@@ -20,15 +20,14 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.mainToolbar);
+        getSupportActionBar().setTitle("Final Project");
+        getSupportActionBar().setSubtitle("Group work");
+
+
         binding.bearImage.setOnClickListener(click-> {
             // Toast notification
-            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
-
-//            // Snackbar notification
-//            Snackbar.make(binding.getRoot(), "Image Clicked", Snackbar.LENGTH_SHORT).show();
-//
-//            // AlertDialog notification
-//            showAlertDialog();
+            Toast.makeText(this, "Opening Bear Image Generator", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, Bear.class);
             startActivity(intent);
         });
