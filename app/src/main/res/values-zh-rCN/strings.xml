@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">期末安卓项目</string>
+    <string name="width_height_text">请输入长度和宽度</string>
+    <string name="valid_values_text">请输入数字</string>
+    <string name="fetch_bear_image_error">抓取小熊图片错误</string>
+    <string name="generate_instructions">输入长度宽度去获取相应的小熊图片</string>
+    <string name="actionbar_subtitle_generator">生成图片</string>
+    <string name="actionbar_title_generator">小熊图片生成器</string>
+    <string name="bear_opening_message">打开小熊图片生成器</string>
+    <string name="generate_new_image_text">生成新图片</string>
+    <string name="width_hint">输入宽度</string>
+    <string name="height_hint">输入高度</string>
     <string name="flight_tracker">航班追踪</string>
     <string name="currency_converter">货币转换</string>
     <string name="trivia">小问题数据库</string>
