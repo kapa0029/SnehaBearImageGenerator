@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.final_project_android.databinding.ActivityHistoryRoomBinding;
-import com.example.final_project_android.databinding.ActivityMainBinding;
+import com.example.final_project_android.databinding.ActivityCurrencymainBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
@@ -43,7 +43,7 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
     ArrayList<History> allstuff = new ArrayList<>();
 
-    private ActivityMainBinding binding;
+    private @NonNull ActivityCurrencymainBinding binding;
     private TextView resultTextView;
     private SharedPreferences sharedPreferences;
     private static final String TEXT_KEY = "text_key";
@@ -77,7 +77,8 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
 
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        binding = ActivityCurrencymainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 

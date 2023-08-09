@@ -8,4 +8,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="toolbarTheme">#657756</color>
     <color name="toolbarText">#FF090000</color>
+    <color name="purple">#673AB7</color>
 </resources>
