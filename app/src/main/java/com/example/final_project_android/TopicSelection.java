@@ -26,7 +26,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Activity for selecting a topic and fetching questions related to the selected topic.
+ */
 public class TopicSelection extends AppCompatActivity implements TopicClickListener {
 
     private RecyclerView recyclerViewTopics;
@@ -36,7 +38,12 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
 
     public TopicSelection() {
     }
-
+    /**
+     * Called when the activity is first created.
+     * Initializes UI elements and sets up topic selection.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,12 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
         setContentView(R.layout.topic_selection);
         requestQueue = Volley.newRequestQueue(this);
 
-
+/**
+ * Callback when a topic is clicked.
+ * Displays a dialog to input the number of questions and fetches questions.
+ *
+ * @param topic The clicked topic.
+ */
 
         // Initialize RecyclerView
         recyclerViewTopics = findViewById(R.id.recyclerViewTopics);
@@ -66,6 +78,12 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
         recyclerViewTopics.setAdapter(topicsAdapter);
     }
 
+    /**
+     * Callback when a topic is clicked.
+     * Displays a dialog to input the number of questions and fetches questions.
+     *
+     * @param topic The clicked topic.
+     */
     @Override
     public void onTopicClicked(Topic topic) {
         // Handle topic selection here, e.g., start the QuestionsActivity
@@ -73,7 +91,11 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
 //        fetchQuestions(topic, numQuestions);
         showNumQuestionDialog(topic);
     }
-
+    /**
+     * Show a dialog to input the number of questions and fetch questions based on the topic.
+     *
+     * @param selectedTopic The selected topic for fetching questions.
+     */
     private void showNumQuestionDialog(final Topic selectedTopic) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Number of Questions");
@@ -102,6 +124,12 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
 
         builder.show();
     }
+    /**
+     * Fetch questions from an API based on the selected topic and number of questions.
+     *
+     * @param selectedTopic The selected topic for fetching questions.
+     * @param numQuestions  The number of questions to fetch.
+     */
     private void fetchQuestions(Topic selectedTopic, int numQuestions) {
         // Build the URL for fetching questions based on the selected topic's category ID
         String url = "https://opentdb.com/api.php?amount=" +numQuestions +"&category=" + selectedTopic.getId() + "&type=multiple";
@@ -159,6 +187,12 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
 
         requestQueue.add(stringRequest);
     }
+    /**
+     * Start the QuestionsActivity to display fetched questions.
+     *
+     * @param topic        The selected topic.
+     * @param questionList The list of fetched questions.
+     */
     private void startQuestionsActivity(Topic topic, List<Question> questionList) {
         Intent intent = new Intent(TopicSelection.this, fetchQuestion.class);
         intent.putExtra("selected_topic", topic);
