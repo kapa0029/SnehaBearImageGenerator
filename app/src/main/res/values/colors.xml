@@ -6,5 +6,7 @@
     <color name="my_text">#58B3BF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="toolbarTheme">#739A75</color>
+    <color name="purple">#7851A9</color>
 
 </resources>
