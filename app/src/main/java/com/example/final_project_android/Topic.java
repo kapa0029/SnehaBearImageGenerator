@@ -24,9 +24,7 @@ public class Topic implements Parcelable {
         return title;
     }
 
-    public String getDescription() {
-        return description;
-    }
+
 
     @Override
     public int describeContents() {
@@ -55,5 +53,10 @@ public class Topic implements Parcelable {
         id = in.readInt();
         title = in.readString();
         description = in.readString();
+    }
+
+
+    public String getDescription() {
+        return  description;
     }
 }

@@ -15,4 +15,23 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp"/>
 
+
+
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Data" />
+
+    <!-- View Top Players Button -->
+    <Button
+        android:id="@+id/buttonViewTopPlayers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Top Players"
+        android:visibility="invisible"
+       />
 </LinearLayout>
+
+

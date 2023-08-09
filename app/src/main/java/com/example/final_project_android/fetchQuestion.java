@@ -1,9 +1,14 @@
 package com.example.final_project_android;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,7 +29,6 @@ public class fetchQuestion extends AppCompatActivity {
 
     private List<Integer> userAnswers;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,7 @@ public class fetchQuestion extends AppCompatActivity {
         showQuestion(currentQuestionIndex);
 
         buttonNext.setOnClickListener(view -> {
+
             int checkedRadioButtonId = radioGroupAnswers.getCheckedRadioButtonId();
             if (checkedRadioButtonId == -1) {
                 // No radio button is selected, show an error message or handle the situation as needed
@@ -60,25 +65,63 @@ public class fetchQuestion extends AppCompatActivity {
                 buttonNext.setText("Submit");
             }
 
-
             // Handle the Next button click
             if (currentQuestionIndex < questionList.size() - 1) {
                 currentQuestionIndex++;
                 showQuestion(currentQuestionIndex);
             } else {
+                showNameInputDialog();
+            }
+        });
+    }
+
+    private void showNameInputDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter Your Name That you want in the database");
+
+        View viewInflated = LayoutInflater.from(this).inflate(R.layout.input_name, null);
+        final EditText inputName = viewInflated.findViewById(R.id.inputName);
+        builder.setView(viewInflated);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String playerName = inputName.getText().toString().trim();
                 int correctAnswers = calculateCorrectAnswers();
-                int totalQuestions = questionList.size();
-                double scorePercentage = ((double) correctAnswers / totalQuestions) * 100;
+                double scorePercentage = ((double) correctAnswers / questionList.size()) * 100;
+
+                Score score = new Score();
+                score.setPlayerName(playerName);
+                score.setScore((int) scorePercentage);
+
+                // Perform database insertion on a background thread
+                new Thread(() -> {
+                    ScoreDatabase database = ScoreDatabase.getInstance(fetchQuestion.this);
+                    ScoreDao scoreDao = database.scoreDao();
+                    scoreDao.insertScore(score);
+
+
+                }).start();
 
                 // All questions answered, navigate to score/activity result
                 Intent intent = new Intent(fetchQuestion.this, ScoreActivity.class);
                 intent.putExtra("questions", (ArrayList<? extends Parcelable>) questionList);
-                intent.putExtra("userAnswers",(ArrayList<Integer>)userAnswers);
-
+                intent.putExtra("userAnswers", (ArrayList<Integer>) userAnswers);
                 intent.putExtra("scorePercentage", scorePercentage);
+                intent.putExtra("playerName", playerName);
+                intent.putExtra("correctAnswer", correctAnswers);
                 startActivity(intent);
             }
         });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     private int calculateCorrectAnswers() {
@@ -104,6 +147,9 @@ public class fetchQuestion extends AppCompatActivity {
 
         return correctAnswers;
     }
+
+
+
 
 
 

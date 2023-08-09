@@ -2,11 +2,14 @@ package com.example.final_project_android;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +18,8 @@ import java.util.List;
 public class ScoreActivity extends AppCompatActivity {
 
     private TextView textViewScore;
+    private Button buttonSave;
+    private Button buttonViewTopPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +27,35 @@ public class ScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
 
         textViewScore = findViewById(R.id.textViewScore);
+        buttonSave = findViewById(R.id.buttonSave);
+        buttonViewTopPlayers = findViewById(R.id.buttonViewTopPlayers);
 
         // Get the questionList and userAnswers from the intent
         double scorePercentage = getIntent().getDoubleExtra("scorePercentage", 0.0);
 
         // Show dialog to get user's name
         showNameInputDialog(scorePercentage);
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle saving data logic here
+                // For example, you can show a toast message
+                Toast.makeText(ScoreActivity.this, "Data saved!", Toast.LENGTH_SHORT).show();
+
+                // Update buttonViewTopPlayers visibility
+                buttonViewTopPlayers.setVisibility(View.VISIBLE);
+            }
+        });
+
+        buttonViewTopPlayers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle opening the TopPlayersActivity
+                Intent intent = new Intent(ScoreActivity.this, TopPlayersActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void showNameInputDialog(double scorePercentage) {
