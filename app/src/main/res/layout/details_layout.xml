@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/ConvertedCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="ConvertedCurrency"
+        app:layout_constraintStart_toStartOf="@+id/ConvertedNum"
+        app:layout_constraintTop_toBottomOf="@+id/ConvertedNum" />
+
+    <TextView
+        android:id="@+id/OrinialNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="OrinialNum"
+        app:layout_constraintStart_toStartOf="@+id/OrinalCurrency"
+        app:layout_constraintTop_toBottomOf="@+id/OrinalCurrency" />
+
+
+    <TextView
+        android:id="@+id/OrinalCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:text="OrinalCurrency"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ConvertedNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="ConvertedNum"
+        app:layout_constraintStart_toStartOf="@+id/OrinialNum"
+        app:layout_constraintTop_toBottomOf="@+id/OrinialNum" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Id"
+        app:layout_constraintStart_toStartOf="@+id/ConvertedCurrency"
+        app:layout_constraintTop_toBottomOf="@+id/ConvertedCurrency" />
+</androidx.constraintlayout.widget.ConstraintLayout>

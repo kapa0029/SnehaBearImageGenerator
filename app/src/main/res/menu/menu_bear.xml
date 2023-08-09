@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <item-->
+<!--        android:id="@+id/helpBear"-->
+<!--        android:title="@string/help_menu_item"-->
+<!--        app:showAsAction="always"-->
+<!--        android:icon="@drawable/help_bear"-->
+<!--        />-->
+
+    <item
+        android:id="@+id/item_trivia"
+        android:icon="@drawable/toolbar_trivia"
+        android:title="Go to Trivia Question"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_flight"
+        android:icon="@drawable/toolbar_flight"
+        android:title="Go to Bear Generator"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_currency"
+        android:icon="@drawable/toolbar_currency"
+        android:title="Go to Currency Converter"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/helpBear"
+        android:title="Help"
+        app:showAsAction="never" />
+
+</menu>
