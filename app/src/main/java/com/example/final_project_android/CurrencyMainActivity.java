@@ -3,7 +3,6 @@ package com.example.final_project_android;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -133,8 +132,8 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
 
             Snackbar snackbar = Snackbar.make(saveButton, "@string/You choose to save", Snackbar.LENGTH_SHORT);
-            ColorStateList colorStateList = getResources().getColorStateList(R.color.purple);
-            snackbar.setBackgroundTintList(colorStateList);
+//            ColorStateList colorStateList = getResources().getColorStateList(R.color.purple);
+//            snackbar.setBackgroundTintList(colorStateList);
             snackbar.show();
         });
 
