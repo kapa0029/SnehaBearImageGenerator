@@ -5,16 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.final_project_android.data.MainActivityViewModel;
@@ -75,7 +71,7 @@ public class HistoryRoom extends AppCompatActivity {
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() -> {
                 // Fetch all data from the database and populate the allstuff list
-                List<History> histories = MainActivity.myDAO.getAllHistory();
+                List<History> histories = CurrencyMainActivity.myDAO.getAllHistory();
                 allstuff.clear();
                 allstuff.addAll(histories);
 

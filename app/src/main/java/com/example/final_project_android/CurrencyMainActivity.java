@@ -17,10 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.final_project_android.R;
 import com.example.final_project_android.databinding.ActivityHistoryRoomBinding;
 import com.example.final_project_android.databinding.ActivityMainBinding;
-import com.example.final_project_android.databinding.InformationBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
@@ -29,23 +27,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.json.JSONException;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-public class MainActivity extends AppCompatActivity {
+public class CurrencyMainActivity extends AppCompatActivity {
     HistoryDatabase myDB ;
    static HistoryDAO myDAO;
 
@@ -152,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         historyButton.setOnClickListener(v -> {
 
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(CurrencyMainActivity.this);
 
             builder.setMessage("@string/Do you want to see the history")
                     .setTitle("@string/See Hisytory?");
@@ -253,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.help) {
-            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this);
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CurrencyMainActivity.this);
             builder.setMessage("Input the currency type(3 letters word) and the number of currency, then click the convert button to get the result" )
                     .setTitle("Instruction")
                     .setPositiveButton("yes", (dialog, cl) -> {
