@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         binding.flightTracker.setOnClickListener(click->
                 startActivity(new Intent(this, FlightTracker.class)));
 
-       binding.trivia.setOnClickListener(click->
-               startActivity(new Intent(this, Trivia.class)));
-
-       binding.currencyConverter.setOnClickListener(click->
-               startActivity(new Intent(this, CurrencyConverter.class)));
+//       binding.trivia.setOnClickListener(click->
+//               startActivity(new Intent(this, Trivia.class)));
+//
+//       binding.currencyConverter.setOnClickListener(click->
+//               startActivity(new Intent(this, CurrencyConverter.class)));
 
         setSupportActionBar(binding.mainToolbar);
         getSupportActionBar().setTitle("Final Project");
