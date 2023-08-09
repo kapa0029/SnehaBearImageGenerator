@@ -45,9 +45,11 @@ public class Bear extends AppCompatActivity {
         binding = ActivityBearBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        String actionBarSubTitle = getResources().getString(R.string.actionbar_subtitle_generator);
+        String actionBarTitle = getResources().getString(R.string.actionbar_title_generator);
         setSupportActionBar(binding.bearToolbar);
-        getSupportActionBar().setTitle("Bear Image Generator");
-        getSupportActionBar().setSubtitle("Generate Images");
+        getSupportActionBar().setTitle(actionBarTitle);
+        getSupportActionBar().setSubtitle(actionBarSubTitle);
 
         bearRequestQueue = Volley.newRequestQueue(this);
 
@@ -67,10 +69,11 @@ public class Bear extends AppCompatActivity {
 
             String enteredWidthStr = binding.widthTextField.getText().toString();
             String enteredHeightStr = binding.heightTextField.getText().toString();
-
+            String bothDimensionsText = getResources().getString(R.string.width_height_text);
+            String NumericOnlyText = getResources().getString(R.string.valid_values_text);
             if (enteredWidthStr.isEmpty() || enteredHeightStr.isEmpty()) {
                 // Show a toast message if either width or height is empty
-                Toast.makeText(this, "Please enter both width and height", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, bothDimensionsText, Toast.LENGTH_SHORT).show();
             } else {
                 try {
                     int enteredWidth = Integer.parseInt(enteredWidthStr);
@@ -83,7 +86,7 @@ public class Bear extends AppCompatActivity {
 
                 } catch (NumberFormatException e) {
                     // Show a toast message if the user entered non-numeric values for width or height
-                    Toast.makeText(this, "Please enter valid numeric values for width and height", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, NumericOnlyText, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -138,8 +141,9 @@ private void fetchBearImage(int width, int height) {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                String errorFetching = getResources().getString(R.string.fetch_bear_image_error);
                                 // Error occurred while fetching the image. Handle the error.
-                                Toast.makeText(Bear.this, "Error fetching bear image", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Bear.this, errorFetching, Toast.LENGTH_SHORT).show();
                             }
                         }
                 );
@@ -194,8 +198,9 @@ private void fetchBearImage(int width, int height) {
         return true;
     }
     private void showHelpSnackbar() {
+        String helpMessage = getResources().getString(R.string.generate_instructions);
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                "Enter width and height to generate customized bear images", Snackbar.LENGTH_LONG);
+                helpMessage, Snackbar.LENGTH_LONG);
         snackbar.setBackgroundTint(ContextCompat.getColor(this, R.color.toolbarTheme));
         snackbar.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();

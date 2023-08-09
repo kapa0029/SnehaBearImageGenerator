@@ -34,12 +34,13 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
 
         recyclerView = findViewById(R.id.recyclerViewSavedImages);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        String actionBarSubTitle = getResources().getString(R.string.actionbar_subtitle_saved_images);
+        String actionBarTitle = getResources().getString(R.string.actionbar_title_generator);
 
         Toolbar toolbar = findViewById(R.id.bearToolbar); // Find the Toolbar by its ID
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Bear Image Generator");
-        getSupportActionBar().setSubtitle("Saved Images");
+        getSupportActionBar().setTitle(actionBarTitle);
+        getSupportActionBar().setSubtitle(actionBarSubTitle);
 
         // Retrieve bearItems from the database using the BearItemRepository
         BearItemRepository bearItemRepository = new BearItemRepository(getApplication());
@@ -80,15 +81,18 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
 
     @Override
     public void onItemLongClick(int position) {
+        String alertTitle = getResources().getString(R.string.alert_title_delete_image);
+        String alertSubTitle = getResources().getString(R.string.alert_subtitle_delete_image);
+        String imageDeletedText = getResources().getString(R.string.image_deleted_text);
         // Show the AlertDialog for confirmation
         new AlertDialog.Builder(this)
-                .setTitle("Delete Image")
-                .setMessage("Are you sure you want to delete this image?")
+                .setTitle(alertTitle)
+                .setMessage(alertSubTitle)
                 .setPositiveButton("Yes", (dialog, which) -> {
                     // Delete the item from the database and update the RecyclerView
                     adapter.deleteItem(position);
                     adapter.notifyItemRemoved(position);
-                    Toast.makeText(this, "Image deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, imageDeletedText, Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("No", null)
                 .show();
@@ -99,7 +103,6 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
         int id = item.getItemId();
         if (id == R.id.helpBear) {
             showAlertDialog();
-            //Toast.makeText(this, "Click on an image to see its dimensions", Toast.LENGTH_SHORT).show();
             return true;
         }
         // Handle other menu items if needed
@@ -112,9 +115,10 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
         return true;
     }
     private void showAlertDialog() {
+
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("How to use")
-                .setMessage("Long press the saved image to delete it and click to see its dimensions ")
+        builder.setTitle(getResources().getString(R.string.how_to_use))
+                .setMessage(getResources().getString(R.string.how_to_use_help))
                 .setPositiveButton("OK", (dialog, which) -> {
                     // Do something when the user clicks the positive button (OK)
                     dialog.dismiss();
