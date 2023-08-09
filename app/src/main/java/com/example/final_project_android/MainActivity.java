@@ -1,9 +1,9 @@
 package com.example.final_project_android;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,18 +20,37 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+       binding.bearImage.setOnClickListener(click->
+               startActivity(new Intent(this, Bear.class)));
+
+        binding.flightTracker.setOnClickListener(click->
+                startActivity(new Intent(this, FlightTracker.class)));
+
+       binding.trivia.setOnClickListener(click->
+               startActivity(new Intent(this, Trivia.class)));
+
+       binding.currencyConverter.setOnClickListener(click->
+               startActivity(new Intent(this, CurrencyConverter.class)));
+
         setSupportActionBar(binding.mainToolbar);
         getSupportActionBar().setTitle("Final Project");
         getSupportActionBar().setSubtitle("Group work");
 
-
-        binding.bearImage.setOnClickListener(click-> {
+       binding.bearImage.setOnClickListener(click-> {
             String startingMessage = getResources().getString(R.string.bear_opening_message);
             // Toast notification
             Toast.makeText(this, startingMessage, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, Bear.class);
             startActivity(intent);
         });
+ 
+
+//         binding.bearImage.setOnClickListener(click-> {
+//             // Toast notification
+//             Toast.makeText(this, "Opening Bear Image Generator", Toast.LENGTH_SHORT).show();
+//             Intent intent = new Intent(MainActivity.this, Bear.class);
+//             startActivity(intent);
+//         });
 
 
     }

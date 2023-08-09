@@ -3,7 +3,19 @@
     <string name="currency_converter">Go to Currency Converter</string>
     <string name="trivia">Go to Trivia Question Database</string>
     <string name="bear_image">Go to Bear Image Generator</string>
-    <string name="width_height_text">Please enter both width and height</string>
+
+    <string name="enter_text">Enter the airport code</string>
+    <string name="airport_hint">Type airport code here</string>
+    <string name="delete_button">DELETE FROM DATABASE</string>
+    <string name="search_button">SEARCH</string>
+    <string name="list_button">LIST</string>
+    <string name="save_button">SAVE TO DATABASE</string>
+
+  
+  
+  
+  
+   <string name="width_height_text">Please enter both width and height</string>
     <string name="valid_values_text">Please enter valid numeric values for width and height</string>
     <string name="fetch_bear_image_error">Error fetching bear image</string>
     <string name="generate_instructions">Enter height and width to generate customized bear images</string>
@@ -24,6 +36,4 @@
     <string name="how_to_use">HOW TO USE</string>
     <string name="how_to_use_help">Long click on an image to delete it and click to see its dimensions</string>
     <string name="help_menu_item">Help</string>
-
-
 </resources>
