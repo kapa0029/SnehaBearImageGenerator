@@ -12,11 +12,22 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+/**
+ * A fragment that displays details of a bear image, including width, height, and the image itself.
+ */
 public class BearImageDetailsFragment extends Fragment {
     private static final String ARG_WIDTH = "width";
     private static final String ARG_HEIGHT = "height";
     private static final String ARG_IMAGE = "image";
 
+    /**
+     * Creates a new instance of the BearImageDetailsFragment with the provided width, height, and image.
+     *
+     * @param width  The width of the bear image.
+     * @param height The height of the bear image.
+     * @param image  The byte array representing the image.
+     * @return A new instance of BearImageDetailsFragment.
+     */
     public static BearImageDetailsFragment newInstance(int width, int height, byte[] image) {
         BearImageDetailsFragment fragment = new BearImageDetailsFragment();
         Bundle args = new Bundle();
@@ -44,8 +55,8 @@ public class BearImageDetailsFragment extends Fragment {
             imageView.setImageBitmap(bitmap);
             String widthText = getResources().getString(R.string.width_header_text);
             String heightText = getResources().getString(R.string.height_header_text);
-            widthTextView.setText(widthText+": " + width);
-            heightTextView.setText(heightText + ": "+ height);
+            widthTextView.setText(widthText + ": " + width);
+            heightTextView.setText(heightText + ": " + height);
 
             Log.d("BearImageDetails", "Width: " + width);
             Log.d("BearImageDetails", "Height: " + height);
