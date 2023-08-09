@@ -27,13 +27,24 @@ public class MainActivity extends AppCompatActivity {
 //       binding.trivia.setOnClickListener(click->
 //               startActivity(new Intent(this, Trivia.class)));
 //
-//       binding.currencyConverter.setOnClickListener(click->
-//               startActivity(new Intent(this, CurrencyConverter.class)));
+
+
+      binding.currencyConverter.setOnClickListener(click->
+             startActivity(new Intent(this, CurrencyMainActivity.class)));
+
 
         setSupportActionBar(binding.mainToolbar);
         getSupportActionBar().setTitle("Final Project");
         getSupportActionBar().setSubtitle("Group work");
 
+       binding.bearImage.setOnClickListener(click-> {
+            String startingMessage = getResources().getString(R.string.bear_opening_message);
+            // Toast notification
+            Toast.makeText(this, startingMessage, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, Bear.class);
+            startActivity(intent);
+        });
+ 
 
 //         binding.bearImage.setOnClickListener(click-> {
 //             // Toast notification
@@ -42,21 +53,7 @@ public class MainActivity extends AppCompatActivity {
 //             startActivity(intent);
 //         });
 
-    }
-    private void showAlertDialog() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("Alert Dialog")
-                .setMessage("This is an AlertDialog notification!")
-                .setPositiveButton("OK", (dialog, which) -> {
-                    // Do something when the user clicks the positive button (OK)
-                    dialog.dismiss();
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    // Do something when the user clicks the negative button (Cancel)
-                    dialog.dismiss();
-                })
-                .setCancelable(false) // Prevent dismissing the dialog by tapping outside
-                .show();
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

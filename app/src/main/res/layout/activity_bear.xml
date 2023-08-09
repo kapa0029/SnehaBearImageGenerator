@@ -24,7 +24,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:hint="Type width here"
+        android:hint="@string/width_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewSavedBearImages" />
 
@@ -34,7 +34,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:hint="Type height here"
+        android:hint="@string/height_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewSavedBearImages" />
 
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
-        android:text="Generate New Image"
+        android:text="@string/generate_new_image_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Width"
+        android:text="@string/width_header_text"
         app:layout_constraintEnd_toEndOf="@+id/widthTextField"
         app:layout_constraintStart_toStartOf="@+id/widthTextField"
         app:layout_constraintTop_toBottomOf="@+id/widthTextField" />
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Height"
+        android:text="@string/height_header_text"
         app:layout_constraintEnd_toEndOf="@+id/heightTextField"
         app:layout_constraintStart_toStartOf="@+id/heightTextField"
         app:layout_constraintTop_toBottomOf="@+id/heightTextField" />
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="View saved images"
+        android:text="@string/view_saved_images_text"
         app:layout_constraintEnd_toEndOf="@+id/generate"
         app:layout_constraintStart_toStartOf="@+id/generate"
         app:layout_constraintTop_toBottomOf="@+id/generate" />

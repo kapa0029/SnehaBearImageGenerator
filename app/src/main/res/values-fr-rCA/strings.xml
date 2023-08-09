@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Final_Project_Android</string>
+    <string name="actionbar_subtitle_saved_images">Images enregistrées</string>
+    <string name="flight_tracker">Aller à Aviation Stack Flight Tracker</string>
+    <string name="currency_converter">Aller au convertisseur de devises</string>
+    <string name="trivia">Aller à la base de données de questions Trivia</string>
+    <string name="bear_image">Aller au générateur d\'images d\'ours</string>
+    <string name="width_height_text">Veuillez entrer la largeur et la hauteur</string>
+    <string name="valid_values_text">Veuillez entrer des valeurs numériques valides pour la largeur et la hauteur</string>
+    <string name="fetch_bear_image_error">Erreur lors de la récupération de l\'image de l\'ours</string>
+    <string name="generate_instructions">Entrez la hauteur et la largeur pour générer des images d\'ours personnalisées</string>
+    <string name="actionbar_subtitle_generator">Générer des images</string>
+    <string name="actionbar_title_generator">Générateur d\'images d\'ours</string>
+    <string name="bear_opening_message">Ouverture du générateur d\'images d\'ours</string>
+    <string name="generate_new_image_text">Générer une nouvelle image</string>
+    <string name="width_hint">Tapez la largeur ici</string>
+    <string name="height_hint">Tapez la hauteur ici</string>
+    <string name="width_header_text">Largeur</string>
+    <string name="height_header_text">Hauteur</string>
+    <string name="view_saved_images_text">Afficher les images enregistrées</string>
+    <string name="alert_title_delete_image">Supprimer l\'image</string>
+    <string name="alert_subtitle_delete_image">Êtes-vous sûr de vouloir supprimer cette image?</string>
+    <string name="image_deleted_text">Image supprimée</string>
+    <string name="how_to_use">COMMENT UTILISER</string>
+    <string name="how_to_use_help">Cliquez longuement sur une image pour la supprimer et cliquez pour voir ses dimensions</string>
+    <string name="help_menu_item">Aider</string>
+
+</resources>
