@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/helpBear"
-        android:title="Help"
+        android:title="@string/help_menu_item"
         app:showAsAction="always"
         android:icon="@drawable/help_bear"
         />

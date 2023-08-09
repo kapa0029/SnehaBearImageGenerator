@@ -42,8 +42,10 @@ public class BearImageDetailsFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
 
             imageView.setImageBitmap(bitmap);
-            widthTextView.setText("Width: " + width);
-            heightTextView.setText("Height: " + height);
+            String widthText = getResources().getString(R.string.width_header_text);
+            String heightText = getResources().getString(R.string.height_header_text);
+            widthTextView.setText(widthText+": " + width);
+            heightTextView.setText(heightText + ": "+ height);
 
             Log.d("BearImageDetails", "Width: " + width);
             Log.d("BearImageDetails", "Height: " + height);
