@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Bear">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bearToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#657756"
+        android:elevation="4dp"
+        app:titleTextColor="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_bear"/>
+    <EditText
+        android:id="@+id/widthTextField"
+        android:layout_width="145dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/width_hint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSavedBearImages" />
+
+    <EditText
+        android:id="@+id/heightTextField"
+        android:layout_width="145dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/height_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSavedBearImages" />
+
+    <Button
+        android:id="@+id/generate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:text="@string/generate_new_image_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSavedBearImages" />
+
+    <TextView
+        android:id="@+id/widthHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/width_header_text"
+        app:layout_constraintEnd_toEndOf="@+id/widthTextField"
+        app:layout_constraintStart_toStartOf="@+id/widthTextField"
+        app:layout_constraintTop_toBottomOf="@+id/widthTextField" />
+
+    <TextView
+        android:id="@+id/heightHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/height_header_text"
+        app:layout_constraintEnd_toEndOf="@+id/heightTextField"
+        app:layout_constraintStart_toStartOf="@+id/heightTextField"
+        app:layout_constraintTop_toBottomOf="@+id/heightTextField" />
+
+    <Button
+        android:id="@+id/viewImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/view_saved_images_text"
+        app:layout_constraintEnd_toEndOf="@+id/generate"
+        app:layout_constraintStart_toStartOf="@+id/generate"
+        app:layout_constraintTop_toBottomOf="@+id/generate" />
+    <!-- RecyclerView to display saved bear images -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSavedBearImages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bearToolbar" />
+
+    <ImageView
+        android:id="@+id/bear_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSavedBearImages" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
