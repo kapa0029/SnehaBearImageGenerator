@@ -36,4 +36,9 @@
     <string name="how_to_use">HOW TO USE</string>
     <string name="how_to_use_help">Long click on an image to delete it and click to see its dimensions</string>
     <string name="help_menu_item">Help</string>
+
+
+
+
+    <string name="trivia_actionbar_title">Trivia Question Database</string>
 </resources>

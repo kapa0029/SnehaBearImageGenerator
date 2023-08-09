@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.mainToolbar);
+        getSupportActionBar().setTitle("Final Project");
+        getSupportActionBar().setSubtitle("Group work");
 
         Button buttonTrivia = findViewById(R.id.trivia);
         buttonTrivia.setOnClickListener(v -> {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.bearImage.setOnClickListener(click->
                 startActivity(new Intent(this, Bear.class)));
+
 
         binding.flightTracker.setOnClickListener(click->
                 startActivity(new Intent(this, FlightTracker.class)));
@@ -45,9 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, CurrencyMainActivity.class)));
 
 
-        setSupportActionBar(binding.mainToolbar);
-        getSupportActionBar().setTitle("Final Project");
-        getSupportActionBar().setSubtitle("Group work");
+
 
         binding.bearImage.setOnClickListener(click-> {
             String startingMessage = getResources().getString(R.string.bear_opening_message);
@@ -100,6 +102,6 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //        return false;
 //    }
-
 }
+
 
