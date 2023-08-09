@@ -2,14 +2,12 @@ package com.example.final_project_android;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.final_project_android.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,11 +24,11 @@ public class MainActivity extends AppCompatActivity {
         binding.flightTracker.setOnClickListener(click->
                 startActivity(new Intent(this, FlightTracker.class)));
 
-       binding.trivia.setOnClickListener(click->
-               startActivity(new Intent(this, Trivia.class)));
-
-       binding.currencyConverter.setOnClickListener(click->
-               startActivity(new Intent(this, CurrencyConverter.class)));
+//       binding.trivia.setOnClickListener(click->
+//               startActivity(new Intent(this, Trivia.class)));
+//
+//       binding.currencyConverter.setOnClickListener(click->
+//               startActivity(new Intent(this, CurrencyConverter.class)));
 
         setSupportActionBar(binding.mainToolbar);
         getSupportActionBar().setTitle("Final Project");
@@ -81,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else if (id==R.id.flight_tracker) {
-
-
+            startActivity(new Intent(this, FlightTracker.class));
+            return true;
         }
         else{
             return super.onOptionsItemSelected(item);
