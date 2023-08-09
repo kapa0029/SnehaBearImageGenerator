@@ -1,6 +1,7 @@
 package com.example.final_project_android;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -66,9 +67,9 @@ public class MyBearAdapter extends RecyclerView.Adapter<MyBearViewHolder> {
         byte[] imageByteArray = bearItems.get(position).getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
         holder.savedImageView.setImageBitmap(bitmap);
-
-        holder.savedHeightView.setText("Height: " + String.valueOf(bearItems.get(position).getHeight()));
-        holder.savedWidthView.setText("Width: " + String.valueOf(bearItems.get(position).getWidth()));
+        Resources resources = context.getResources();
+        holder.savedHeightView.setText(resources.getString(R.string.height_header_text) +": "+ String.valueOf(bearItems.get(position).getHeight()));
+        holder.savedWidthView.setText(resources.getString(R.string.width_header_text) +": "+ String.valueOf(bearItems.get(position).getWidth()));
     }
 
     @Override
