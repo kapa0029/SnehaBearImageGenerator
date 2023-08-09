@@ -1,26 +1,29 @@
 package com.example.final_project_android;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.final_project_android.databinding.ActivityHistoryRoomBinding;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+
 import com.example.final_project_android.databinding.ActivityCurrencymainBinding;
+import com.example.final_project_android.databinding.ActivityHistoryRoomBinding;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -32,10 +35,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import org.json.JSONException;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class CurrencyMainActivity extends AppCompatActivity {
     HistoryDatabase myDB ;
@@ -56,7 +55,7 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_currency, menu);
 
         super.onCreateOptionsMenu(menu);
 
@@ -84,6 +83,7 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("Currency Converter");
 
 
 
@@ -253,6 +253,15 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
                     }).show();
         }
+        else if (item.getItemId() == R.id.item_bear) {
+            startActivity(new Intent(this, Bear.class));
+        }
+        else if (item.getItemId() == R.id.item_flight) {
+            startActivity(new Intent(this, FlightTracker.class));
+        }
+//        else if (item.getItemId() == R.id.item_trivia) {
+//            startActivity(new Intent(this, Trivia.class));
+//        }
         return true;
     }
 }
