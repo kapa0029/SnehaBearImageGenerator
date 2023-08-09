@@ -1,13 +1,10 @@
 package com.example.final_project_android;
 
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,14 +13,16 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
-import com.example.final_project_android.databinding.ActivityBearBinding;
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.final_project_android.databinding.ActivityBearBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
@@ -190,6 +189,15 @@ private void fetchBearImage(int width, int height) {
             showHelpSnackbar();
             return true;
         }
+        else if (id == R.id.item_currency) {
+            startActivity(new Intent(this, CurrencyMainActivity.class));
+        }
+        else if (id == R.id.item_flight) {
+            startActivity(new Intent(this, FlightTracker.class));
+        }
+//        else if (item.getItemId() == R.id.item_trivia) {
+//            startActivity(new Intent(this, Trivia.class));
+//        }
         return super.onOptionsItemSelected(item);
     }
     @Override
