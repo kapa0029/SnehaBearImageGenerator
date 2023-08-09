@@ -13,10 +13,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.final_project_android.R;
-
-import java.util.List;
-
 /**
  * Activity for displaying the user's score and handling interactions related to the score.
  */

@@ -4,8 +4,6 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.example.final_project_android.ScoreDatabase;
-
 /**
  * Custom Application class for initializing the ScoreDatabase instance.
  */

@@ -3,8 +3,6 @@ package com.example.final_project_android;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 /**
  * Represents a topic that can be displayed in the app.
  * Implements Parcelable to allow passing Topic objects between activities.
