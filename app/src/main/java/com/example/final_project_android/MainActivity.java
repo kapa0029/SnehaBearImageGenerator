@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 //       binding.trivia.setOnClickListener(click->
 //               startActivity(new Intent(this, Trivia.class)));
 //
-//       binding.currencyConverter.setOnClickListener(click->
-//               startActivity(new Intent(this, CurrencyConverter.class)));
+      binding.currencyConverter.setOnClickListener(click->
+             startActivity(new Intent(this, CurrencyMainActivity.class)));
 
         setSupportActionBar(binding.mainToolbar);
         getSupportActionBar().setTitle("Final Project");
