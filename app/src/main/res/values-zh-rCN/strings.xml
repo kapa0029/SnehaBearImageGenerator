@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Final_Project_Android</string>
+    <string name="flight_tracker">转到航空堆栈飞行跟踪器</string>
+    <string name="currency_converter">转到货币转换器</string>
+    <string name="trivia">转到琐事问题数据库</string>
+    <string name="bear_image">转到熊图像生成器</string>
+</resources>
