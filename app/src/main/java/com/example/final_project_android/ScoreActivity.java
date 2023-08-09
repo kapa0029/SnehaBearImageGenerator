@@ -13,14 +13,25 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.final_project_android.R;
+
 import java.util.List;
 
+/**
+ * Activity for displaying the user's score and handling interactions related to the score.
+ */
 public class ScoreActivity extends AppCompatActivity {
 
     private TextView textViewScore;
     private Button buttonSave;
     private Button buttonViewTopPlayers;
 
+    /**
+     * Called when the activity is first created.
+     * Initializes the UI elements and handles user interactions.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +41,7 @@ public class ScoreActivity extends AppCompatActivity {
         buttonSave = findViewById(R.id.buttonSave);
         buttonViewTopPlayers = findViewById(R.id.buttonViewTopPlayers);
 
-        // Get the questionList and userAnswers from the intent
+        // Get the scorePercentage from the intent
         double scorePercentage = getIntent().getDoubleExtra("scorePercentage", 0.0);
 
         // Show dialog to get user's name
@@ -58,6 +69,11 @@ public class ScoreActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Show a dialog to get the user's name and then display the score.
+     *
+     * @param scorePercentage The user's score percentage.
+     */
     private void showNameInputDialog(double scorePercentage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Your Name");
@@ -84,10 +100,14 @@ public class ScoreActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Display the user's score.
+     *
+     * @param name            The user's name.
+     * @param scorePercentage The user's score percentage.
+     */
     private void displayScore(String name, double scorePercentage) {
         String scoreMessage = name + ", you scored: " + scorePercentage + "%";
         textViewScore.setText(scoreMessage);
     }
-
-
 }

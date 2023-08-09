@@ -3,6 +3,7 @@ package com.example.final_project_android;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -16,9 +17,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An activity for displaying and answering a series of questions.
+ */
 public class fetchQuestion extends AppCompatActivity {
 
     private TextView textViewQuestion;
@@ -30,6 +36,11 @@ public class fetchQuestion extends AppCompatActivity {
     private List<Integer> userAnswers;
 
     @Override
+    /**
+     * Method called when the activity is created. Initializes UI elements, sets up question display, and handles user input.
+     *
+     * @param savedInstanceState The saved state of the activity.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_look);
@@ -75,6 +86,10 @@ public class fetchQuestion extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Displays an input dialog for the user to enter their name, calculates the score, and stores it in the database.
+     */
     private void showNameInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Your Name That you want in the database");
@@ -124,6 +139,11 @@ public class fetchQuestion extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Calculates the number of correct answers based on user responses to the questions.
+     *
+     * @return The number of correct answers.
+     */
     private int calculateCorrectAnswers() {
         int correctAnswers = 0;
 
@@ -151,7 +171,11 @@ public class fetchQuestion extends AppCompatActivity {
 
 
 
-
+    /**
+     * Displays the specified question on the screen, allowing the user to select an answer.
+     *
+     * @param questionIndex The index of the question to be displayed.
+     */
 
     private void showQuestion(int questionIndex) {
         Question question = questionList.get(questionIndex);
@@ -178,7 +202,21 @@ public class fetchQuestion extends AppCompatActivity {
             // Update the selected option for the current question
             int selectedOptionIndex = radioGroupAnswers.indexOfChild(findViewById(checkedId));
             question.setSelectedOptionIndex(selectedOptionIndex);
+         //   Snackbar.make(findViewById(android.R.id.content), "Option selected: " + question.getOptions().get(selectedOptionIndex), Snackbar.LENGTH_SHORT).show();
         });
+
     }
+    /**
+     * Save the player's name to shared preferences.
+     *
+     * @param playerName The player's name to be saved.
+     */
+    private void savePlayerName(String playerName) {
+        SharedPreferences preferences = getSharedPreferences("PlayerPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("playerName", playerName);
+        editor.apply();
+    }
+
 
 }

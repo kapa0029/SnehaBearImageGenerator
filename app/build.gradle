@@ -10,6 +10,8 @@ android {
         viewBinding true
     }
 
+
+
     defaultConfig {
         applicationId "com.example.final_project_android"
         minSdk 21
