@@ -7,11 +7,13 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Yaxi\.android\avd\Pixel_2_API_27.avd" />
+            <!-- Keep the desired AVD path -->
+            <value value="C:\Users\rituj\.android\avd\Pixel_6_Pro_API_33.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-08-09T06:59:19.513381700Z" />
+    <!-- Keep the desired timestamp -->
+    <timeTargetWasSelectedWithDropDown value="2023-08-05T03:53:40.985288800Z" />
   </component>
 </project>

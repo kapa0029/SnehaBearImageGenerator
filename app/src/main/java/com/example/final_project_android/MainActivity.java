@@ -2,9 +2,13 @@ package com.example.final_project_android;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.widget.Button;
+
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.example.final_project_android.databinding.ActivityMainBinding;
 
@@ -16,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+        Button buttonTrivia = findViewById(R.id.trivia);
+        buttonTrivia.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, TopicSelection.class);
+            startActivity(intent);
+        });
+
+    }
+}
 
        binding.bearImage.setOnClickListener(click->
                startActivity(new Intent(this, Bear.class)));
@@ -86,3 +100,4 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 }
+
