@@ -79,6 +79,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">BearImageDatabase</span>
 <span class="extends-implements">extends androidx.room.RoomDatabase</span></div>
+<div class="block">The Room database class that represents the bear image database.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -126,10 +127,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="BearItemDao.html" title="interface in com.example.final_project_android">BearItemDao</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#bearDao()" class="member-name-link">bearDao</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns the DAO (Data Access Object) for bear image database operations.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="BearImageDatabase.html" title="class in com.example.final_project_android">BearImageDatabase</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getInstance(android.content.Context)" class="member-name-link">getInstance</a><wbr>(android.content.Context&nbsp;context)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns the singleton instance of the database.</div>
+</div>
 </div>
 </div>
 </div>
@@ -168,12 +173,24 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="bearDao()">
 <h3>bearDao</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="BearItemDao.html" title="interface in com.example.final_project_android">BearItemDao</a></span>&nbsp;<span class="element-name">bearDao</span>()</div>
+<div class="block">Returns the DAO (Data Access Object) for bear image database operations.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The BearItemDao instance.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getInstance(android.content.Context)">
 <h3>getInstance</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="BearImageDatabase.html" title="class in com.example.final_project_android">BearImageDatabase</a></span>&nbsp;<span class="element-name">getInstance</span><wbr><span class="parameters">(android.content.Context&nbsp;context)</span></div>
+<div class="block">Returns the singleton instance of the database. If the instance doesn't exist, it creates one.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>context</code> - The application context.</dd>
+<dt>Returns:</dt>
+<dd>The singleton instance of BearImageDatabase.</dd>
+</dl>
 </section>
 </li>
 </ul>
