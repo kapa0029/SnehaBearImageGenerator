@@ -34,23 +34,22 @@ import java.util.List;
  * help instructions, and other actions through the options menu.
  */
 public class Bear extends AppCompatActivity {
-    // Declare variables and objects
-    // The binding for the activity layout
+    /** The binding for the activity layout */
     private ActivityBearBinding binding;
 
-    // Shared preferences to store user preferences
+    /** Shared preferences to store user preferences */
     private SharedPreferences preferences;
 
-    // Volley request queue for network requests
+    /** Volley request queue for network requests */
     private RequestQueue bearRequestQueue;
 
-    // Repository to manage interactions with the bear image database
+    /** Repository to manage interactions with the bear image database */
     private BearItemRepository bearItemRepository;
 
-    // List to store saved bear images
+    /** List to store saved bear images */
     private List<BearItemEntity> savedImagesList = new ArrayList<>();
 
-    // DAO (Data Access Object) for bear image database operations
+    /** DAO (Data Access Object) for bear image database operations */
     private BearItemDao bearDao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -235,7 +234,7 @@ private void fetchBearImage(int width, int height) {
         }
         else if (item.getItemId() == R.id.item_trivia) {
 
-            startActivity(new Intent(this, ScoreActivity.class));
+            startActivity(new Intent(this, TopicSelection.class));
 
         }
         return super.onOptionsItemSelected(item);

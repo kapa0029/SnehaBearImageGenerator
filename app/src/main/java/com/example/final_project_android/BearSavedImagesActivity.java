@@ -1,5 +1,6 @@
 package com.example.final_project_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +19,9 @@ import com.example.final_project_android.databinding.ActivityBearBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
-
+/**
+ * Activity for displaying saved bear images and handling user interactions.
+ */
 public class BearSavedImagesActivity extends AppCompatActivity implements MyBearAdapter.OnItemClickListener, MyBearAdapter.OnItemLongClickListener {
     ActivityBearBinding binding;
     private RecyclerView recyclerView;
@@ -54,7 +57,11 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
             recyclerView.setAdapter(adapter); // Set the adapter to the RecyclerView
         });
     }
-
+    /**
+     * Handles the click event of a RecyclerView item.
+     *
+     * @param position The position of the clicked item.
+     */
     @Override
     public void onItemClick(int position) {
         // Check if the bearItems list is null or empty
@@ -78,6 +85,11 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
         fragmentTransaction.addToBackStack(null); // Optional: Add to the back stack for back navigation
         fragmentTransaction.commit();
     }
+    /**
+     * Handles the long click event of a RecyclerView item.
+     *
+     * @param position The position of the long-clicked item.
+     */
 
     @Override
     public void onItemLongClick(int position) {
@@ -97,7 +109,12 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
                 .setNegativeButton("No", null)
                 .show();
     }
-
+    /**
+     * Handles options menu item clicks.
+     *
+     * @param item The selected menu item.
+     * @return true if the event was handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -105,15 +122,33 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
             showAlertDialog();
             return true;
         }
-        // Handle other menu items if needed
+        else if (id == R.id.item_currency) {
+            startActivity(new Intent(this, CurrencyMainActivity.class));
+        }
+        else if (id == R.id.item_flight) {
+            startActivity(new Intent(this, FlightTracker.class));
+        }
+        else if (item.getItemId() == R.id.item_trivia) {
+
+            startActivity(new Intent(this, TopicSelection.class));
+
+        }
         return super.onOptionsItemSelected(item);
     }
-
+    /**
+     * Inflates the options menu.
+     *
+     * @param menu The menu to inflate.
+     * @return true if the menu was inflated, false otherwise.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_bear, menu);
         return true;
     }
+    /**
+     * Shows an AlertDialog with help instructions.
+     */
     private void showAlertDialog() {
 
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);

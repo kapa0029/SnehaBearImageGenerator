@@ -259,7 +259,7 @@ public class CurrencyMainActivity extends AppCompatActivity {
             startActivity(new Intent(this, FlightTracker.class));
         }
         else if (item.getItemId() == R.id.item_trivia) {
-            startActivity(new Intent(this, ScoreActivity.class));
+            startActivity(new Intent(this, TopicSelection.class));
         }
 
         return true;
