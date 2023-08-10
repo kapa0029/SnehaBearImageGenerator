@@ -53,4 +53,11 @@
     <string name="sports_subtitle">Test Your Knowledge on sports</string>
     <string name="geography_subtitle">Study the relationship between people and their environmnet</string>
     <string name="mythology_subtitle">Test Your Knowledge of mytho</string>
+
+
+
+    <string name="topPlayers_help_message">This page displays the top players</string>
+    <string name="enter_number_of_ques">Enter number of questions</string>
+    <string name="topicSelection_help">Choose a topic and then provide the number of questions</string>
+    <string name="fetch_question_error">Failed to fetch questions.</string>
 </resources>

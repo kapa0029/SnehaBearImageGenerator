@@ -78,7 +78,8 @@ public class TopPlayersActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.helpTrivia) {
-            String helpMessage = "This page displays the top players";
+
+            String helpMessage = getResources().getString(R.string.topPlayers_help_message);
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                     helpMessage, Snackbar.LENGTH_LONG);
             snackbar.setBackgroundTint(ContextCompat.getColor(this, R.color.toolbarTheme));
