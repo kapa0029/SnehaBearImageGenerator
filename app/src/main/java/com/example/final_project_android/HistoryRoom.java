@@ -24,6 +24,9 @@ import java.util.Timer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/**
+ * Activity displaying historical currency conversion entries.
+ */
 public class HistoryRoom extends AppCompatActivity {
 
     private RecyclerView.Adapter<MyRowHolder> myAdapter;
@@ -35,6 +38,11 @@ public class HistoryRoom extends AppCompatActivity {
     private Timer timer;
 
 
+    /**
+     * Initialize the activity and set up the UI components.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +105,9 @@ public class HistoryRoom extends AppCompatActivity {
         });
     }
 
+    /**
+     * Holder class for each row in the RecyclerView.
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
         TextView OriNumText;
         TextView OriCurrencyText;

@@ -41,4 +41,16 @@
 
 
     <string name="trivia_actionbar_title">Trivia Question Database</string>
+    <string name="trivia_subtitle">Topics</string>
+    <string name="percentage_string">percentage</string>
+    <string name="history_title">History</string>
+    <string name="science_title">Science</string>
+    <string name="sports_title">Sports</string>
+    <string name="geography_title">Geography</string>
+    <string name="mythology_title">Mythology</string>
+    <string name="history_subtitle">Test your knowledge of historical events</string>
+    <string name="science_subtitle">Explore questions related to the scientific world.</string>
+    <string name="sports_subtitle">Test Your Knowledge on sports</string>
+    <string name="geography_subtitle">Study the relationship between people and their environmnet</string>
+    <string name="mythology_subtitle">Test Your Knowledge of mytho</string>
 </resources>

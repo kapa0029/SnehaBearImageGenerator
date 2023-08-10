@@ -1,28 +1,26 @@
 package com.example.final_project_android;
 
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.example.final_project_android.databinding.ActivityCurrencymainBinding;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.final_project_android.databinding.ActivityHistoryRoomBinding;
+import com.example.final_project_android.databinding.ActivityCurrencymainBinding;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -35,6 +33,21 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import org.json.JSONException;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+/**
+ * This activity serves as the main screen for a currency conversion app.
+ * It allows users to convert currency values using an external API and
+ * save conversion history to a Room database.
+ */
 public class CurrencyMainActivity extends AppCompatActivity {
     HistoryDatabase myDB ;
    static HistoryDAO myDAO;
@@ -50,18 +63,26 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdapter;
-
+    /**
+     * Initializes the options menu when the activity is created.
+     * @param menu The menu in which items are placed.
+     * @return true if the menu is to be displayed; false otherwise.
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_currency, menu);
+        getMenuInflater().inflate(R.menu.my_menu, menu);
 
         super.onCreateOptionsMenu(menu);
 
         return true;
     }
 
-
+    /**
+     * Called when the activity is created. Sets up UI elements, database,
+     * click listeners, and shared preferences.
+     * @param savedInstanceState A Bundle containing the activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +103,6 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("Currency Converter");
 
 
 
@@ -98,7 +118,10 @@ public class CurrencyMainActivity extends AppCompatActivity {
             String moneyType = binding.MoneyType.getText().toString();
             String convertedMoneyType = binding.ConvertedMoneyType.getText().toString();
             String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_aRJQGlPUr3Lq9gizAnf2eCYjZ8TDGCJSHzPSLicC";
-            new ConvertCurrencyTask().execute(apiUrl, moneyType, convertedMoneyType, String.valueOf(amount));
+
+            ConvertCurrencyTask convertCurrencyTask = new ConvertCurrencyTask();
+            convertCurrencyTask.convertCurrency(apiUrl, moneyType, convertedMoneyType, String.valueOf(amount));
+
             CharSequence text = "Convert!";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this, text, duration);
@@ -132,8 +155,8 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
 
             Snackbar snackbar = Snackbar.make(saveButton, "@string/You choose to save", Snackbar.LENGTH_SHORT);
-//            ColorStateList colorStateList = getResources().getColorStateList(R.color.purple);
-//            snackbar.setBackgroundTintList(colorStateList);
+            ColorStateList colorStateList = getResources().getColorStateList(R.color.purple);
+            snackbar.setBackgroundTintList(colorStateList);
             snackbar.show();
         });
 
@@ -183,65 +206,61 @@ public class CurrencyMainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * An inner class responsible for making currency conversion requests using Volley.
+     */
 
-    private class ConvertCurrencyTask extends AsyncTask<String, Void, Double> {
+    private class ConvertCurrencyTask {
+        /**
+         * Converts currency using an external API.
+         * @param apiUrl The URL of the API for currency conversion.
+         * @param moneyType The source currency type.
+         * @param convertedMoneyType The target currency type.
+         * @param amount The amount of currency to convert.
+         */
+        public void convertCurrency(String apiUrl, String moneyType, String convertedMoneyType, String amount) {
+            RequestQueue requestQueue = Volley.newRequestQueue(CurrencyMainActivity.this);
 
-        @Override
-        protected Double doInBackground(String... params) {
-            String apiUrl = params[0];
-            String moneyType = params[1];
-            String convertedMoneyType = params[2];
-            String amount = params[3];
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
 
-            try {
-                URL url = new URL(apiUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
+                                JSONObject ratesObject = jsonObject.getJSONObject("data");
+                                double rate1 = ratesObject.getDouble(moneyType);
+                                double rate2 = ratesObject.getDouble(convertedMoneyType);
 
-                int responseCode = connection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    InputStream inputStream = connection.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                    StringBuilder response = new StringBuilder();
-                    String line;
+                                // Perform the currency conversion
+                                double convertedAmount = (rate2 / rate1) * Double.parseDouble(amount);
 
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
+                                // Update UI with converted amount
+                                resultTextView.setText(String.valueOf(convertedAmount));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                resultTextView.setText("Error converting currency");
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                            resultTextView.setText("Error converting currency");
+                        }
+                    });
 
-                    reader.close();
-                    inputStream.close();
-
-                    JSONObject jsonObject = new JSONObject(response.toString());
-
-
-                    JSONObject ratesObject = jsonObject.getJSONObject("data");
-                    double rate1 = ratesObject.getDouble(moneyType);
-                    double rate2 = ratesObject.getDouble(convertedMoneyType);
-
-                    // Perform the currency conversion
-                    double convertedAmount = (rate2 / rate1) * Double.parseDouble(amount);
-                    return convertedAmount;
-                } else {
-                    // Handle API call error
-                    return null;
-                }
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Double convertedAmount) {
-            if (convertedAmount != null) {
-                resultTextView.setText(String.valueOf(convertedAmount));
-            } else {
-                resultTextView.setText("Error converting currency");
-            }
+            // Add the request to the RequestQueue
+            requestQueue.add(stringRequest);
         }
     }
 
+    /**
+     * Handles options menu item selection, providing user instructions on demand.
+     * @param item The selected menu item.
+     * @return true to consume the event here.
+     */
    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.help) {
@@ -252,16 +271,6 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
                     }).show();
         }
-        else if (item.getItemId() == R.id.item_bear) {
-            startActivity(new Intent(this, Bear.class));
-        }
-        else if (item.getItemId() == R.id.item_flight) {
-            startActivity(new Intent(this, FlightTracker.class));
-        }
-        else if (item.getItemId() == R.id.item_trivia) {
-            startActivity(new Intent(this, ScoreActivity.class));
-        }
-
         return true;
     }
 }
