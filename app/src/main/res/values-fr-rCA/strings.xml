@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Final_Project_Android</string>
+    <string name="airport_hint">Tapez le code de l\'aéroport ici</string>
+    <string name="delete_button">SUPPRIMER DE LA BASE DE DONNÉES</string>
+    <string name="search_button">RECHERCHE</string>
+    <string name="list_button">LISTE</string>
+    <string name="save_button">ENREGISTRER DANS LA BASE DE DONNÉES</string>
+    <string name="enter_text">Entrez le code de l\'aéroport</string>
     <string name="actionbar_subtitle_saved_images">Images enregistrées</string>
     <string name="flight_tracker">Aller à Aviation Stack Flight Tracker</string>
     <string name="currency_converter">Aller au convertisseur de devises</string>
@@ -25,5 +31,22 @@
     <string name="how_to_use">COMMENT UTILISER</string>
     <string name="how_to_use_help">Cliquez longuement sur une image pour la supprimer et cliquez pour voir ses dimensions</string>
     <string name="help_menu_item">Aider</string>
+    <string name="trivia_actionbar_title">Base de données de questions triviales</string>
+    <string name="trivia_subtitle">Les sujets</string>
+    <string name="percentage_string">pourcentage</string>
+    <string name="history_title">Histoire</string>
+    <string name="science_title">Science</string>
+    <string name="sports_title">Des sports</string>
+    <string name="geography_title">Géographie</string>
+    <string name="mythology_title">Mythologie</string>
+    <string name="history_subtitle">Testez vos connaissances sur les événements historiques</string>
+    <string name="science_subtitle">Explorer des questions liées au monde scientifique.</string>
+    <string name="sports_subtitle">Testez vos connaissances sur le sport</string>
+    <string name="geography_subtitle">Étudier la relation entre les personnes et leur environnement</string>
+    <string name="mythology_subtitle">Testez vos connaissances sur le mythe</string>
+    <string name="enter_number_of_ques">Entrez le nombre de questions</string>
+    <string name="topicSelection_help">Choisissez un sujet, puis indiquez le nombre de questions</string>
+    <string name="fetch_question_error">Échec de la récupération des questions.</string>
+    <string name="topPlayers_help_message">Cette page affiche les meilleurs joueurs</string>
 
 </resources>
