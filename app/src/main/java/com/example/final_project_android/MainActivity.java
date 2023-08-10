@@ -11,20 +11,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.final_project_android.databinding.ActivityMainBinding;
-
+/**
+ * The main entry point of the application that displays the main menu options.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Inflate the layout using View Binding
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Set up the toolbar with title and subtitle
         setSupportActionBar(binding.mainToolbar);
         getSupportActionBar().setTitle("Final Project");
         getSupportActionBar().setSubtitle("Group work");
 
+        // Set up listeners for different menu options
         Button buttonTrivia = findViewById(R.id.trivia);
         buttonTrivia.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, TopicSelection.class);
@@ -32,19 +37,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        // Launch the Bear Image Generator
         binding.bearImage.setOnClickListener(click->
                 startActivity(new Intent(this, Bear.class)));
 
-
+        // Launch the Flight Tracker
         binding.flightTracker.setOnClickListener(click->
                 startActivity(new Intent(this, FlightTracker.class)));
 
+        // Launch the Trivia Game
         binding.trivia.setOnClickListener(click->
-                startActivity(new Intent(this, ScoreActivity.class)));
+                startActivity(new Intent(this, TopicSelection.class)));
 
-
-
+        // Launch the Currency Converter
         binding.currencyConverter.setOnClickListener(click->
                 startActivity(new Intent(this, CurrencyMainActivity.class)));
 
@@ -52,11 +57,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         binding.bearImage.setOnClickListener(click-> {
+            // Get the opening message from resources
             String startingMessage = getResources().getString(R.string.bear_opening_message);
-            // Toast notification
+
+            // Display a toast notification with the opening message
             Toast.makeText(this, startingMessage, Toast.LENGTH_SHORT).show();
+
+            // Create an intent to launch the Bear Image Generator activity
             Intent intent = new Intent(MainActivity.this, Bear.class);
-            startActivity(intent);
+            startActivity(intent); // Start the Bear activity
         });
 
 

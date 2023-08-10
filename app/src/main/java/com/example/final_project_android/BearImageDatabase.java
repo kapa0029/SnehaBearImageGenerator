@@ -12,7 +12,9 @@ import androidx.room.RoomDatabase;
 @Database(entities = {BearItemEntity.class}, version = 1)
 public abstract class BearImageDatabase extends RoomDatabase {
 
-    // Singleton instance of the database
+    /**
+     * Singleton instance of the database
+     */
     private static BearImageDatabase instance;
 
     /**
