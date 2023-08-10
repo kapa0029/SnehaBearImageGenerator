@@ -234,7 +234,9 @@ private void fetchBearImage(int width, int height) {
             startActivity(new Intent(this, FlightTracker.class));
         }
         else if (item.getItemId() == R.id.item_trivia) {
-            startActivity(new Intent(this, TopicSelection.class));
+
+            startActivity(new Intent(this, ScoreActivity.class));
+
         }
         return super.onOptionsItemSelected(item);
     }

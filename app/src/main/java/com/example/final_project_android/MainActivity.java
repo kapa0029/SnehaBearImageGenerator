@@ -31,28 +31,37 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
+
+        binding.bearImage.setOnClickListener(click->
+                startActivity(new Intent(this, Bear.class)));
+
+
         binding.flightTracker.setOnClickListener(click->
                 startActivity(new Intent(this, FlightTracker.class)));
 
-//       binding.trivia.setOnClickListener(click->
-//               startActivity(new Intent(this, Trivia.class)));
-//
-
-
-      binding.currencyConverter.setOnClickListener(click->
-             startActivity(new Intent(this, CurrencyMainActivity.class)));
+        binding.trivia.setOnClickListener(click->
+                startActivity(new Intent(this, ScoreActivity.class)));
 
 
 
+        binding.currencyConverter.setOnClickListener(click->
+                startActivity(new Intent(this, CurrencyMainActivity.class)));
 
-       binding.bearImage.setOnClickListener(click-> {
+
+
+
+        binding.bearImage.setOnClickListener(click-> {
             String startingMessage = getResources().getString(R.string.bear_opening_message);
             // Toast notification
             Toast.makeText(this, startingMessage, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, Bear.class);
             startActivity(intent);
         });
- 
+
+
+    }
+
 
 //         binding.bearImage.setOnClickListener(click-> {
 //             // Toast notification
@@ -62,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 //         });
 
 
-    }
+
     
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

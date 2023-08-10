@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -42,9 +46,14 @@ public class fetchQuestion extends AppCompatActivity {
      * @param savedInstanceState The saved state of the activity.
      */
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_look);
-
+        //Toolbar for Trivia main activity
+        Toolbar triviaToolbar = findViewById(R.id.triviaToolbar);
+        setSupportActionBar(triviaToolbar);
+        getSupportActionBar().setTitle("Trivia Question Database");
+        getSupportActionBar().setSubtitle("Topics");
         // Get the questionList from the intent
         questionList = getIntent().getParcelableArrayListExtra("questions");
         userAnswers = new ArrayList<>();
@@ -205,6 +214,37 @@ public class fetchQuestion extends AppCompatActivity {
          //   Snackbar.make(findViewById(android.R.id.content), "Option selected: " + question.getOptions().get(selectedOptionIndex), Snackbar.LENGTH_SHORT).show();
         });
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.helpTrivia) {
+            String helpMessage = "Answer the question and click on \"NEXT\" to get the next question";
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                    helpMessage, Snackbar.LENGTH_LONG);
+            snackbar.setBackgroundTint(ContextCompat.getColor(this, R.color.toolbarTheme));
+            snackbar.setTextColor(ContextCompat.getColor(this, R.color.white));
+            snackbar.show();
+            return true;
+        }
+        else if (id == R.id.item_currency) {
+            startActivity(new Intent(this, CurrencyMainActivity.class));
+        }
+        else if (id == R.id.item_flight) {
+            startActivity(new Intent(this, FlightTracker.class));
+        }
+        else if (item.getItemId() == R.id.item_bear) {
+            startActivity(new Intent(this, Bear.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    /**
+     * Inflates the options menu.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_trivia, menu);
+        return true;
     }
     /**
      * Save the player's name to shared preferences.

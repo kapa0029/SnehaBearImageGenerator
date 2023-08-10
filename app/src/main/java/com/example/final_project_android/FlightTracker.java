@@ -143,9 +143,9 @@ public class FlightTracker extends AppCompatActivity {
         else if (item.getItemId() == R.id.item_currency) {
             startActivity(new Intent(this, CurrencyMainActivity.class));
         }
-//        else if (item.getItemId() == R.id.item_trivia) {
-//            startActivity(new Intent(this, Trivia.class));
-//        }
+        else if (item.getItemId() == R.id.item_trivia) {
+            startActivity(new Intent(this, ScoreActivity.class));
+        }
         return true;
     }
 
@@ -262,7 +262,7 @@ public class FlightTracker extends AppCompatActivity {
             editor.apply();
 
             airportCode = binding.airportCodeField.getText().toString();
-            searchURL = "http://api.aviationstack.com/v1/flights?access_key=7b54c799172d42e2ae6f6a532022ee76&dep_iata=" + airportCode;
+            searchURL = "http://api.aviationstack.com/v1/flights?access_key=e848b2c7bdcabb06f8166cc6ea4d84ee&dep_iata=" + airportCode;
 
             queue = Volley.newRequestQueue(this);
             JsonObjectRequest request = new JsonObjectRequest(
