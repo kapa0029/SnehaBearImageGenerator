@@ -35,5 +35,17 @@
     <string name="how_to_use_help">长按图像将其删除，然后单击查看其尺寸</string>
     <string name="help_menu_item">帮助</string>
     <string name="trivia_actionbar_title">琐事问题数据库</string>
+    <string name="trivia_subtitle">主题</string>
+    <string name="percentage_string">百分比</string>
+    <string name="history_title">历史</string>
+    <string name="science_title">科学</string>
+    <string name="sports_title">运动的</string>
+    <string name="geography_title">地理</string>
+    <string name="mythology_title">神话</string>
+    <string name="history_subtitle">测试你对历史事件的了解</string>
+    <string name="science_subtitle">探索与科学世界相关的问题。</string>
+    <string name="sports_subtitle">测试您的运动知识</string>
+    <string name="geography_subtitle">研究人与环境之间的关系</string>
+    <string name="mythology_subtitle">测试你对神话的了解</string>
 
 </resources>

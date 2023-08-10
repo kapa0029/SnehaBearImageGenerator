@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, FlightTracker.class)));
 
         binding.trivia.setOnClickListener(click->
-                startActivity(new Intent(this, ScoreActivity.class)));
+                startActivity(new Intent(this, TopicSelection.class)));
 
 
 

@@ -63,8 +63,8 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
         //Toolbar for Trivia main activity
         Toolbar triviaToolbar = findViewById(R.id.triviaToolbar);
         setSupportActionBar(triviaToolbar);
-        getSupportActionBar().setTitle("Trivia Question Database");
-        getSupportActionBar().setSubtitle("Topics");
+        getSupportActionBar().setTitle(getResources().getString(R.string.trivia_actionbar_title));
+        getSupportActionBar().setSubtitle(getResources().getString(R.string.trivia_subtitle));
 
 
 /**
@@ -82,11 +82,11 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
 
         // Create a list of topics (you can fetch it from API or local resources)
         List<Topic> topicList = new ArrayList<>();
-        topicList.add(new Topic(23, "History", "Test your knowledge of historical events."));
-        topicList.add(new Topic(17, "Science & Nature", "Explore questions related to the scientific world."));
-        topicList.add(new Topic(21,"Sports","Test Your Knowledge on sports"));
-        topicList.add(new Topic(10,"Geography","Study the relationship between people and their environmnet"));
-        topicList.add(new Topic(20,"Mythology","Test Your Knowledge of mytho"));
+        topicList.add(new Topic(23, getResources().getString(R.string.history_title), getResources().getString(R.string.history_subtitle)));
+        topicList.add(new Topic(17, getResources().getString(R.string.science_title), getResources().getString(R.string.science_subtitle)));
+        topicList.add(new Topic(21,getResources().getString(R.string.sports_title),getResources().getString(R.string.sports_subtitle)));
+        topicList.add(new Topic(10,getResources().getString(R.string.geography_title),getResources().getString(R.string.geography_subtitle)));
+        topicList.add(new Topic(20,getResources().getString(R.string.mythology_title),getResources().getString(R.string.mythology_subtitle)));
 
 
         // Set up the TopicsAdapter

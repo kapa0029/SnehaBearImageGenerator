@@ -36,8 +36,8 @@ public class TopPlayersActivity extends AppCompatActivity {
         listViewTopPlayers = findViewById(R.id.listViewTopPlayers);
         Toolbar triviaToolbar = findViewById(R.id.triviaToolbar);
         setSupportActionBar(triviaToolbar);
-        getSupportActionBar().setTitle("Trivia Question Database");
-        getSupportActionBar().setSubtitle("Topics");
+        getSupportActionBar().setTitle(getResources().getString(R.string.trivia_actionbar_title));
+        getSupportActionBar().setSubtitle(getResources().getString(R.string.trivia_subtitle));
         new Thread(() -> {
             // Fetch top players' data from the database using your ScoreDao
             ScoreDatabase database = ScoreDatabase.getInstance(this);
@@ -68,7 +68,7 @@ public class TopPlayersActivity extends AppCompatActivity {
 
         // Loop through each player and format their name and score
         for (Score player : topPlayers) {
-            String playerNameAndScore = player.getPlayerName() + ": " + player.getScore() + " Percentage";
+            String playerNameAndScore = player.getPlayerName() + ": " + player.getScore() + getResources().getString(R.string.percentage_string);
             playerNamesAndScores.add(playerNameAndScore);
         }
 
