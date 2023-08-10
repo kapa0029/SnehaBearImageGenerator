@@ -144,7 +144,7 @@ public class FlightTracker extends AppCompatActivity {
             startActivity(new Intent(this, CurrencyMainActivity.class));
         }
         else if (item.getItemId() == R.id.item_trivia) {
-            startActivity(new Intent(this, ScoreActivity.class));
+            startActivity(new Intent(this, TopicSelection.class));
         }
         return true;
     }
