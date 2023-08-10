@@ -3,7 +3,9 @@ package com.example.final_project_android;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+/**
+ * Represents a historical currency conversion entry.
+ */
 @Entity
 public class History {
 
@@ -25,6 +27,14 @@ public class History {
     @ColumnInfo(name="ConvertedNumber")
     String ConvertedNumber;
 
+    /**
+     * Constructs a new History object with provided currency conversion details.
+     *
+     * @param on Original number value.
+     * @param oc Original currency code.
+     * @param cn Converted number value.
+     * @param cc Converted currency code.
+     */
     public History( String on,
                     String oc,
                     String cn,
@@ -38,6 +48,9 @@ public class History {
 
     }
 
+    /**
+     * Default constructor for database queries.
+     */
     public History()//for database queries
     {}
 }

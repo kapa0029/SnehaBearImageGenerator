@@ -54,6 +54,12 @@ public class CurrencyMainActivity extends AppCompatActivity {
     RecyclerView.Adapter myAdapter;
 
 
+    /**
+     * Initialize the options menu when created.
+     *
+     * @param menu The menu in which items are placed.
+     * @return True if the menu is successfully created.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.my_menu, menu);
@@ -63,6 +69,11 @@ public class CurrencyMainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Initialize the activity when created.
+     *
+     * @param savedInstanceState A Bundle containing the activity's previously saved state.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +184,9 @@ public class CurrencyMainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Save the text to SharedPreferences when the activity is paused.
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -184,7 +197,9 @@ public class CurrencyMainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-
+    /**
+     * A background task to convert currency using API calls.
+     */
     private class ConvertCurrencyTask extends AsyncTask<String, Void, Double> {
 
         @Override
@@ -243,6 +258,12 @@ public class CurrencyMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handle options menu item selections.
+     *
+     * @param item The selected menu item.
+     * @return True if the menu item is successfully handled.
+     */
    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.help) {
