@@ -106,6 +106,7 @@ public class Bear extends AppCompatActivity {
                 }
             }
 
+
         });
 
         // Set up onClickListener for "View Images" button
