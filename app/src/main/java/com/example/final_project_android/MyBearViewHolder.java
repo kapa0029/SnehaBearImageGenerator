@@ -6,6 +6,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * ViewHolder class for displaying individual BearItemEntity objects in a RecyclerView.
+ */
 public class MyBearViewHolder extends RecyclerView.ViewHolder {
 
     ImageView savedImageView;
@@ -13,6 +16,12 @@ public class MyBearViewHolder extends RecyclerView.ViewHolder {
     TextView savedHeightView;
     private MyBearAdapter.OnItemClickListener onItemClickListener; // Add this line
     private MyBearAdapter.OnItemLongClickListener onItemLongClickListener; // Add this line
+    /**
+     * Constructor for MyBearViewHolder.
+     *
+     * @param itemView The view representing an individual item in the RecyclerView.
+     */
+
     public MyBearViewHolder(@NonNull View itemView) {
         super(itemView);
         savedImageView = itemView.findViewById(R.id.savedBearImage);
@@ -39,9 +48,19 @@ public class MyBearViewHolder extends RecyclerView.ViewHolder {
         });
     }
     // Add a setter for the long click listener
+    /**
+     * Sets the listener for item long click events.
+     *
+     * @param onItemLongClickListener The listener to set for long click events.
+     */
     public void setOnItemLongClickListener(MyBearAdapter.OnItemLongClickListener onItemLongClickListener) {
         this.onItemLongClickListener = onItemLongClickListener;
     }
+    /**
+     * Sets the listener for item click events.
+     *
+     * @param onItemClickListener The listener to set for click events.
+     */
     public void setOnItemClickListener(MyBearAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
