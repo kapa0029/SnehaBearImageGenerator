@@ -263,14 +263,27 @@ public class CurrencyMainActivity extends AppCompatActivity {
      */
    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (item.getItemId() == R.id.help) {
-            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CurrencyMainActivity.this);
-            builder.setMessage("Input the currency type(3 letters word) and the number of currency, then click the convert button to get the result" )
-                    .setTitle("Instruction")
-                    .setPositiveButton("yes", (dialog, cl) -> {
+       if (item.getItemId() == R.id.item_bear) {
+           startActivity(new Intent(this, Bear.class));
+           }
+           else if (item.getItemId() ==  R.id.item_flight) {
+               startActivity(new Intent(this, FlightTracker.class));
+           }
+           else if (item.getItemId() == R.id.item_trivia) {
 
-                    }).show();
-        }
-        return true;
+               startActivity(new Intent(this, TopicSelection.class));
+
+           }
+       else if (item.getItemId() == R.id.help) {
+           androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CurrencyMainActivity.this);
+           builder.setMessage("Input the currency type(3 letters word) and the number of currency, then click the convert button to get the result" )
+                   .setTitle("Instruction")
+                   .setPositiveButton("yes", (dialog, cl) -> {
+
+                   }).show();
+       }
+           return super.onOptionsItemSelected(item);
+       }
+
+
     }
-}
