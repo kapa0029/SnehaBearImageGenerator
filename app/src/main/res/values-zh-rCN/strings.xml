@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    
+
     <string name="app_name">期末安卓项目</string>
     <string name="width_height_text">请输入长度和宽度</string>
     <string name="valid_values_text">请输入数字</string>
@@ -21,4 +24,28 @@
     <string name="list_button">列出已存航班</string>
     <string name="save_button">保存至数据库</string>
     <string name="enter_text">请输入机场代码</string>
+    <string name="actionbar_subtitle_saved_images">保存的图像</string>
+    <string name="width_header_text">宽度</string>
+    <string name="height_header_text">高度</string>
+    <string name="view_saved_images_text">查看保存的图像</string>
+    <string name="alert_title_delete_image">删除图像</string>
+    <string name="alert_subtitle_delete_image">您确定要删除该图片吗？</string>
+    <string name="image_deleted_text">图片已删除</string>
+    <string name="how_to_use">如何使用</string>
+    <string name="how_to_use_help">长按图像将其删除，然后单击查看其尺寸</string>
+    <string name="help_menu_item">帮助</string>
+    <string name="trivia_actionbar_title">琐事问题数据库</string>
+    <string name="trivia_subtitle">主题</string>
+    <string name="percentage_string">百分比</string>
+    <string name="history_title">历史</string>
+    <string name="science_title">科学</string>
+    <string name="sports_title">运动的</string>
+    <string name="geography_title">地理</string>
+    <string name="mythology_title">神话</string>
+    <string name="history_subtitle">测试你对历史事件的了解</string>
+    <string name="science_subtitle">探索与科学世界相关的问题。</string>
+    <string name="sports_subtitle">测试您的运动知识</string>
+    <string name="geography_subtitle">研究人与环境之间的关系</string>
+    <string name="mythology_subtitle">测试你对神话的了解</string>
+
 </resources>

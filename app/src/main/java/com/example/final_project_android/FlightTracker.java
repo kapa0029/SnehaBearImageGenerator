@@ -1,13 +1,13 @@
 package com.example.final_project_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,22 +35,80 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/**
+ * MainActivity class for the Flight Tracker app.
+ * This activity manages the user interface, data retrieval, and navigation within the app.
+ */
 public class FlightTracker extends AppCompatActivity {
 
+    /**
+     * The binding instance to inflate and access the layout elements of the activity.
+     */
     protected FlightTrackerBinding binding;
+
+    /**
+     * The Room database instance to interact with flight data.
+     */
     FlightDatabase myDB;
+
+    /**
+     * The Data Access Object (DAO) instance for performing database operations.
+     */
     FlightDAO myDAO;
-    FlightTrackerViewModel flightModel;
-    ArrayList<Flight> theFlights;
-    ArrayList<Flight> savedFlights;
-    int position;
-    int position1;
+
+    /**
+     * SharedPreferences instance for managing persistent data storage.
+     */
     SharedPreferences prefs;
+
+    /**
+     * ViewModel instance for handling UI-related data and operations.
+     */
+    FlightTrackerViewModel flightModel;
+
+    /**
+     * List to store retrieved flight data from API search.
+     */
+    ArrayList<Flight> theFlights;
+
+    /**
+     * List to store saved flight data from the database.
+     */
+    ArrayList<Flight> savedFlights;
+
+    /**
+     * Position of the selected item in the search results list.
+     */
+    int position;
+
+    /**
+     * Position of the selected item in the saved flights list.
+     */
+    int position1;
+
+    /**
+     * Adapter for displaying search result items in the RecyclerView.
+     */
     RecyclerView.Adapter searchAdapter;
+
+    /**
+     * Adapter for displaying saved flight items in the RecyclerView.
+     */
     RecyclerView.Adapter listAdapter;
 
+    /**
+     * RequestQueue instance for managing network requests.
+     */
     RequestQueue queue = null;
+
+    /**
+     * The airport code used for flight searches and data retrieval.
+     */
     protected String airportCode;
+
+    /**
+     * The URL for making flight search API requests.
+     */
     String searchURL;
 
     @Override
@@ -79,6 +137,15 @@ public class FlightTracker extends AppCompatActivity {
                     }))
                     .create().show();
         }
+        else if (item.getItemId() == R.id.item_bear) {
+            startActivity(new Intent(this, Bear.class));
+        }
+        else if (item.getItemId() == R.id.item_currency) {
+            startActivity(new Intent(this, CurrencyMainActivity.class));
+        }
+        else if (item.getItemId() == R.id.item_trivia) {
+            startActivity(new Intent(this, TopicSelection.class));
+        }
         return true;
     }
 
@@ -90,6 +157,7 @@ public class FlightTracker extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.myToolbar);
+        getSupportActionBar().setTitle("Flight Tracker");
 
         prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         airportCode = prefs.getString("airportCode", "");
@@ -99,7 +167,10 @@ public class FlightTracker extends AppCompatActivity {
         myDAO = myDB.fDAO();
 
         flightModel = new ViewModelProvider(this).get(FlightTrackerViewModel.class);
+        savedFlights = flightModel.savedFlights.getValue();
+        theFlights = flightModel.theFlights.getValue();
 
+        // Initialize RecyclerView adapters for search results and saved flights
         searchAdapter = new RecyclerView.Adapter<MyViewHolder>() {
             @NonNull
             @Override
@@ -115,7 +186,6 @@ public class FlightTracker extends AppCompatActivity {
             public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
                 //updates the widgets
                 Flight atThisRow = theFlights.get(position);
-                //puts the string in position at theWords TextView
                 holder.destText.setText(atThisRow.destination);
             }
 
@@ -138,9 +208,7 @@ public class FlightTracker extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(@NonNull MyViewHolder1 holder, int position1) {
-                //updates the widgets
                 Flight atThisRow = savedFlights.get(position1);
-                //puts the string in position at theWords TextView
                 holder.destText.setText(atThisRow.destination);
             }
 
@@ -150,23 +218,26 @@ public class FlightTracker extends AppCompatActivity {
             }
         };
 
-
+        // Set up button click listener to retrieve saved flights from the database
         binding.listSavedButton.setOnClickListener( click -> {
-            savedFlights = new ArrayList<>();
-//            savedFlights.clear();
+            if (savedFlights == null) {
+                savedFlights = new ArrayList<>();
+            } else {
+                savedFlights.clear();
+            }
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() -> {
-                savedFlights.addAll( myDAO.getAllFlights() ); //Once you get the data from database
-                runOnUiThread( () ->
-                        binding.myRecyclerView.setAdapter( listAdapter )); //You can then load the RecyclerView
-                listAdapter.notifyDataSetChanged();
+                savedFlights.addAll( myDAO.getAllFlights() );
+                runOnUiThread( () ->{
+                        binding.myRecyclerView.setAdapter( listAdapter );
+                        listAdapter.notifyDataSetChanged();
+                });
             });
         });
 
-        FrameLayout fragmentLocation = findViewById(R.id.fragmentLocation);
+        // Observe changes in the selectedFlight LiveData and navigate to appropriate fragments
         flightModel.selectedFlight.observe(this, newFlightValue -> {
             if (newFlightValue.id == 0) {
-                //theFlights, position, myAdapter,
                 FlightDetailsFragment flightFragment = new FlightDetailsFragment(newFlightValue, myDAO);
                 getSupportFragmentManager()
                     .beginTransaction()
@@ -183,6 +254,7 @@ public class FlightTracker extends AppCompatActivity {
             }
         });
 
+        // Set up the search button click listener to retrieve flight data from API
         binding.searchButton.setOnClickListener(click -> {
             theFlights = new ArrayList<>();
             SharedPreferences.Editor editor = prefs.edit();
@@ -190,7 +262,7 @@ public class FlightTracker extends AppCompatActivity {
             editor.apply();
 
             airportCode = binding.airportCodeField.getText().toString();
-            searchURL = "http://api.aviationstack.com/v1/flights?access_key=ecb6338d1a834182eb7f8cee251bc267&dep_iata=" + airportCode;
+            searchURL = "http://api.aviationstack.com/v1/flights?access_key=e848b2c7bdcabb06f8166cc6ea4d84ee&dep_iata=" + airportCode;
 
             queue = Volley.newRequestQueue(this);
             JsonObjectRequest request = new JsonObjectRequest(
@@ -203,7 +275,6 @@ public class FlightTracker extends AppCompatActivity {
                             int len = data.length();
                             for (int i = 0; i < len; i++) {
                                 JSONObject thisObj = data.getJSONObject(i);
-                                //String status = thisObj.getString("flight_status");
                                 JSONObject arrival = thisObj.getJSONObject("arrival");
                                 String destination = arrival.getString("airport");
                                 JSONObject departure = thisObj.getJSONObject("departure");
@@ -227,34 +298,53 @@ public class FlightTracker extends AppCompatActivity {
                     });
             queue.add(request);
         });
-
         binding.myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Inner ViewHolder class for displaying search result items in the RecyclerView.
+     * Binds the layout widgets and handles click events on the search result items.
+     */
     protected class MyViewHolder extends RecyclerView.ViewHolder {
         TextView destText;
 
+        /**
+         * Constructor for the MyViewHolder class.
+         *
+         * @param itemView The view representing a single search result item.
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             destText = itemView.findViewById(R.id.destinationText);
-            //add click listener to select
+
+            // Set a click listener for the search result item
             itemView.setOnClickListener( click -> {
-                position = getAdapterPosition();
+                position = getAbsoluteAdapterPosition();
                 Flight selected = theFlights.get(position);
                 flightModel.selectedFlight.postValue(selected);
             });
         }
     }
 
+    /**
+     * Inner ViewHolder class for displaying saved flight items in the RecyclerView.
+     * Binds the layout widgets and handles click events on the saved flight items.
+     */
     protected class MyViewHolder1 extends RecyclerView.ViewHolder {
         TextView destText;
 
+        /**
+         * Constructor for the MyViewHolder1 class.
+         *
+         * @param itemView The view representing a single saved flight item.
+         */
         public MyViewHolder1(@NonNull View itemView) {
             super(itemView);
             destText = itemView.findViewById(R.id.destinationText);
-            //add click listener to select
+
+            // Set a click listener for the saved flight item
             itemView.setOnClickListener( click -> {
-                position1 = getAdapterPosition();
+                position1 = getAbsoluteAdapterPosition();
                 Flight selected = savedFlights.get(position1);
                 flightModel.selectedFlight.postValue(selected);
             });

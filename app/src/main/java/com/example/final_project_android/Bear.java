@@ -1,13 +1,10 @@
 package com.example.final_project_android;
 
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,28 +13,43 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
-import com.example.final_project_android.databinding.ActivityBearBinding;
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.final_project_android.databinding.ActivityBearBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This activity allows users to generate bear images with customized dimensions.
+ * It also displays fetched bear images and provides options for viewing saved images,
+ * help instructions, and other actions through the options menu.
+ */
 public class Bear extends AppCompatActivity {
-    ActivityBearBinding binding;
-    SharedPreferences preferences;
-    RequestQueue bearRequestQueue;
+    /** The binding for the activity layout */
+    private ActivityBearBinding binding;
+
+    /** Shared preferences to store user preferences */
+    private SharedPreferences preferences;
+
+    /** Volley request queue for network requests */
+    private RequestQueue bearRequestQueue;
+
+    /** Repository to manage interactions with the bear image database */
     private BearItemRepository bearItemRepository;
 
+    /** List to store saved bear images */
     private List<BearItemEntity> savedImagesList = new ArrayList<>();
 
+    /** DAO (Data Access Object) for bear image database operations */
     private BearItemDao bearDao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,10 +59,13 @@ public class Bear extends AppCompatActivity {
 
         String actionBarSubTitle = getResources().getString(R.string.actionbar_subtitle_generator);
         String actionBarTitle = getResources().getString(R.string.actionbar_title_generator);
+
+        // Set up the action bar
         setSupportActionBar(binding.bearToolbar);
         getSupportActionBar().setTitle(actionBarTitle);
         getSupportActionBar().setSubtitle(actionBarSubTitle);
 
+        // Set up Volley RequestQueue
         bearRequestQueue = Volley.newRequestQueue(this);
 
         // Get the SharedPreferences instance
@@ -62,7 +77,7 @@ public class Bear extends AppCompatActivity {
         // Initialize the BearItemRepository
         bearItemRepository = new BearItemRepository(getApplication());
 
-
+        // Set up onClickListener for "Generate" button
         binding.generate.setOnClickListener(view -> {
 
             saveUserInputs();
@@ -90,8 +105,10 @@ public class Bear extends AppCompatActivity {
                 }
             }
 
+
         });
 
+        // Set up onClickListener for "View Images" button
         binding.viewImageButton.setOnClickListener(view->{
             // Start the SavedImagesActivity
             Intent intent = new Intent(this, BearSavedImagesActivity.class);
@@ -101,7 +118,12 @@ public class Bear extends AppCompatActivity {
 
 
     }
-
+    /**
+     * Fetches a bear image from the URL based on the provided width and height.
+     *
+     * @param width  The width of the bear image to fetch.
+     * @param height The height of the bear image to fetch.
+     */
 private void fetchBearImage(int width, int height) {
     // Check if the image with the same width and height already exists in the database
     LiveData<BearItemEntity> bearItemLiveData = bearItemRepository.getBearItemBySize(width, height);
@@ -156,6 +178,11 @@ private void fetchBearImage(int width, int height) {
         }
     });
 }
+    /**
+     * Displays the provided bear image in the ImageView.
+     *
+     * @param bearItem The BearItemEntity containing the image to display.
+     */
     private void displayBearImage(BearItemEntity bearItem) {
         byte[] byteArray = bearItem.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -163,6 +190,9 @@ private void fetchBearImage(int width, int height) {
         imageView.setImageBitmap(bitmap);
     }
 
+    /**
+     * Loads saved width and height values from SharedPreferences and populates the EditText fields.
+     */
     private void loadSavedValues() {
         // Retrieve the saved values from SharedPreferences
         String savedWidth = preferences.getString("width", "");
@@ -172,6 +202,9 @@ private void fetchBearImage(int width, int height) {
         binding.widthTextField.setText(savedWidth);
         binding.heightTextField.setText(savedHeight);
     }
+    /**
+     * Saves user-entered width and height values to SharedPreferences.
+     */
     private void saveUserInputs() {
         // Get the user inputs from the EditText fields
         String widthInput = binding.widthTextField.getText().toString();
@@ -183,6 +216,9 @@ private void fetchBearImage(int width, int height) {
         editor.putString("height", heightInput);
         editor.apply();
     }
+    /**
+     * Handles options menu item clicks.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -190,13 +226,28 @@ private void fetchBearImage(int width, int height) {
             showHelpSnackbar();
             return true;
         }
+        else if (id == R.id.item_currency) {
+            startActivity(new Intent(this, CurrencyMainActivity.class));
+        }
+        else if (id == R.id.item_flight) {
+            startActivity(new Intent(this, FlightTracker.class));
+        }
+        else if (item.getItemId() == R.id.item_trivia) {
+
+            startActivity(new Intent(this, TopicSelection.class));
+
+        }
         return super.onOptionsItemSelected(item);
     }
+    /**
+     * Inflates the options menu.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_bear, menu);
         return true;
     }
+    /**  Shows a Snackbar with help instructions.    */
     private void showHelpSnackbar() {
         String helpMessage = getResources().getString(R.string.generate_instructions);
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
