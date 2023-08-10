@@ -10,10 +10,18 @@
     <string name="search_button">SEARCH</string>
     <string name="list_button">LIST</string>
     <string name="save_button">SAVE TO DATABASE</string>
-
-  
-  
-  
+    <string name="flight_help">Help</string>
+    <string name="flight_instructions">Instructions: </string>
+    <string name="flight_barTitle">Flight Tracker</string>
+    <string name="flight_saved">You saved the flight!</string>
+    <string name="flight_deleted">You deleted flight #</string>
+    <string name="flight_undo">Undo</string>
+    <string name="flight_yes">Yes</string>
+    <string name="flight_no">No</string>
+    <string name="flight_ok">OK</string>
+    <string name="flight_alertTitle">Question:</string>
+    <string name="flight_alertMsg">Do you want to delete the flight?</string>
+    <string name="flight_failedconn">Connection Failed</string>
   
    <string name="width_height_text">Please enter both width and height</string>
     <string name="valid_values_text">Please enter valid numeric values for width and height</string>
