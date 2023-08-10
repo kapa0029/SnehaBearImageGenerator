@@ -77,6 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BearItemRepository</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Repository class that handles interactions with the bear image database and provides data to the ViewModel.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +90,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(android.app.Application)" class="member-name-link">BearItemRepository</a><wbr>(android.app.Application&nbsp;application)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructs a new BearItemRepository instance.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,17 +109,25 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#deleteBearImage(com.example.final_project_android.BearItemEntity)" class="member-name-link">deleteBearImage</a><wbr>(<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&nbsp;bearItem)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Deletes a bear item from the database.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>androidx.lifecycle.LiveData&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&gt;&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAllBearItems()" class="member-name-link">getAllBearItems</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves LiveData containing a list of all bear items.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>androidx.lifecycle.LiveData&lt;<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBearItemBySize(int,int)" class="member-name-link">getBearItemBySize</a><wbr>(int&nbsp;width,
  int&nbsp;height)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves LiveData containing a bear item based on the provided width and height.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#insert(com.example.final_project_android.BearItemEntity)" class="member-name-link">insert</a><wbr>(<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&nbsp;bearItem)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Inserts a bear item into the database.</div>
+</div>
 </div>
 </div>
 </div>
@@ -138,6 +149,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(android.app.Application)">
 <h3>BearItemRepository</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BearItemRepository</span><wbr><span class="parameters">(android.app.Application&nbsp;application)</span></div>
+<div class="block">Constructs a new BearItemRepository instance.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>application</code> - The Application context.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -152,12 +168,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getAllBearItems()">
 <h3>getAllBearItems</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">androidx.lifecycle.LiveData&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&gt;&gt;</span>&nbsp;<span class="element-name">getAllBearItems</span>()</div>
+<div class="block">Retrieves LiveData containing a list of all bear items.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>LiveData containing a list of all bear items.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="insert(com.example.final_project_android.BearItemEntity)">
 <h3>insert</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">insert</span><wbr><span class="parameters">(<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&nbsp;bearItem)</span></div>
+<div class="block">Inserts a bear item into the database.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>bearItem</code> - The BearItemEntity to be inserted.</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -165,12 +191,25 @@ loadScripts(document, 'script');</script>
 <h3>getBearItemBySize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">androidx.lifecycle.LiveData&lt;<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&gt;</span>&nbsp;<span class="element-name">getBearItemBySize</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height)</span></div>
+<div class="block">Retrieves LiveData containing a bear item based on the provided width and height.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>width</code> - The width of the bear item.</dd>
+<dd><code>height</code> - The height of the bear item.</dd>
+<dt>Returns:</dt>
+<dd>LiveData containing the bear item with the specified width and height.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="deleteBearImage(com.example.final_project_android.BearItemEntity)">
 <h3>deleteBearImage</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">deleteBearImage</span><wbr><span class="parameters">(<a href="BearItemEntity.html" title="class in com.example.final_project_android">BearItemEntity</a>&nbsp;bearItem)</span></div>
+<div class="block">Deletes a bear item from the database.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>bearItem</code> - The BearItemEntity to be deleted.</dd>
+</dl>
 </section>
 </li>
 </ul>
