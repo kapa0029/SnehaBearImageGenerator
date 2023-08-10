@@ -122,8 +122,9 @@ public class FlightTracker extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.item_help){
             AlertDialog.Builder builder = new AlertDialog.Builder( FlightTracker.this );
-            builder.setTitle("Instructions:")
-                    .setMessage("Welcome to the Aviation Stack Flight Tracker app!\n\n" +
+            builder.setTitle(getResources().getString(R.string.flight_instructions))
+                    .setMessage(
+                            "Welcome to the Aviation Stack Flight Tracker app!\n\n" +
                             "1. Enter the 3-letter airport code in the search box.\n" +
                             "2. Click the 'Search' button to retrieve the list of flights departing from that airport.\n" +
                             "3. The list of flights will be shown below in a scrollable list.\n" +
@@ -131,8 +132,9 @@ public class FlightTracker extends AppCompatActivity {
                             "5. On the details page, you can click the 'Save to Database' button to save the flight details.\n" +
                             "6. Use the 'List' button to view the list of flights saved in the database.\n" +
                             "7. In the 'Saved Flights' list, click on a flight to view its details.\n" +
-                            "8. On the detailed page of a saved flight, click the 'Delete from Database' button to remove the flight from the database.\n\n")
-                    .setPositiveButton("OK", ((dialog, which) -> {
+                            "8. On the detailed page of a saved flight, click the 'Delete from Database' button to remove the flight from the database.\n\n"
+                    )
+                    .setPositiveButton(getResources().getString(R.string.flight_ok), ((dialog, which) -> {
                         dialog.dismiss();
                     }))
                     .create().show();
@@ -157,7 +159,7 @@ public class FlightTracker extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.myToolbar);
-        getSupportActionBar().setTitle("Flight Tracker");
+        getSupportActionBar().setTitle(getResources().getString(R.string.flight_barTitle));
 
         prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         airportCode = prefs.getString("airportCode", "");
@@ -262,7 +264,7 @@ public class FlightTracker extends AppCompatActivity {
             editor.apply();
 
             airportCode = binding.airportCodeField.getText().toString();
-            searchURL = "http://api.aviationstack.com/v1/flights?access_key=e848b2c7bdcabb06f8166cc6ea4d84ee&dep_iata=" + airportCode;
+            searchURL = "http://api.aviationstack.com/v1/flights?access_key=ed69dc00b18eb3483a2cc0a02e2f864c&dep_iata=" + airportCode;
 
             queue = Volley.newRequestQueue(this);
             JsonObjectRequest request = new JsonObjectRequest(
@@ -293,7 +295,7 @@ public class FlightTracker extends AppCompatActivity {
                         searchAdapter.notifyDataSetChanged();
                     },
                     error -> {
-                        Toast.makeText(getApplicationContext(), "Connection Failed",
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.flight_failedconn),
                                 Toast.LENGTH_LONG).show();
                     });
             queue.add(request);

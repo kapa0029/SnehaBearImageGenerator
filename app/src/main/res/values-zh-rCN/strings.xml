@@ -47,5 +47,17 @@
     <string name="sports_subtitle">测试您的运动知识</string>
     <string name="geography_subtitle">研究人与环境之间的关系</string>
     <string name="mythology_subtitle">测试你对神话的了解</string>
+    <string name="flight_help">帮助</string>
+    <string name="flight_instructions">使用指导</string>
+    <string name="flight_barTitle">航班追踪</string>
+    <string name="flight_saved">您保存了此航班</string>
+    <string name="flight_deleted">您删除了此航班 #</string>
+    <string name="flight_undo">撤销</string>
+    <string name="flight_yes">是</string>
+    <string name="flight_no">否</string>
+    <string name="flight_alertTitle">问题</string>
+    <string name="flight_alertMsg">您确定删除此航班吗？</string>
+    <string name="flight_ok">好的</string>
+    <string name="flight_failedconn">连接失败</string>
 
 </resources>

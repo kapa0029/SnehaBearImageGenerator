@@ -46,12 +46,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:inputType="text"
+                android:hint="@string/airport_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            android:hint="@string/airport_hint"-->
+
 
             <Button
                 android:id="@+id/searchButton"

@@ -89,10 +89,10 @@ public class DeleteFragment extends Fragment {
         binding.deleteButton.setOnClickListener( click -> {
             // Build a confirmation dialog
             AlertDialog.Builder builder = new AlertDialog.Builder( getContext() );
-            builder.setMessage( "Do you want to delete the flight?")
-                    .setTitle("Question:")
-                    .setNegativeButton("No", (dialog, cl) -> { } )
-                    .setPositiveButton("Yes", (dialog, cl) -> {
+            builder.setMessage(getResources().getString(R.string.flight_alertMsg))
+                    .setTitle(getResources().getString(R.string.flight_alertTitle))
+                    .setNegativeButton(getResources().getString(R.string.flight_no), (dialog, cl) -> { } )
+                    .setPositiveButton(getResources().getString(R.string.flight_yes), (dialog, cl) -> {
                         // Perform flight deletion
                         Flight toDelete = savedFlights.get(position1);
                         savedFlights.remove(position1);
@@ -105,8 +105,8 @@ public class DeleteFragment extends Fragment {
                         });
 
                         // Show a Snackbar with the option to undo the deletion
-                        Snackbar.make(binding.deleteButton, "You deleted flight #" + position1, Snackbar.LENGTH_LONG)
-                                .setAction("Undo", clk -> {
+                        Snackbar.make(binding.deleteButton, getResources().getString(R.string.flight_deleted) + position1, Snackbar.LENGTH_LONG)
+                                .setAction(getResources().getString(R.string.flight_undo), clk -> {
                                     savedFlights.add(position1, toDelete);
                                     listAdapter.notifyItemInserted(position1);
                                     Executor myThread = Executors.newSingleThreadExecutor();

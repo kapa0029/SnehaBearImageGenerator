@@ -64,7 +64,7 @@ public class FlightDetailsFragment extends Fragment {
         // Set up the save button click listener
         binding.saveButton.setOnClickListener( click -> {
             // Show a toast indicating that the flight has been saved
-            Toast.makeText(getActivity(), "You saved the flight!",
+            Toast.makeText(getActivity(), getResources().getString(R.string.flight_saved),
                     Toast.LENGTH_LONG).show();
 
             // Insert the selected flight into the database using a background thread
