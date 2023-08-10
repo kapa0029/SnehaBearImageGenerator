@@ -114,7 +114,8 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
      */
     private void showNumQuestionDialog(final Topic selectedTopic) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter Number of Questions");
+
+        builder.setTitle(getResources().getString(R.string.enter_number_of_ques));
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -155,7 +156,7 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.helpTrivia) {
-            String helpMessage = "Choose a topic and then provide the number of questions";
+            String helpMessage = getResources().getString(R.string.topicSelection_help);
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                     helpMessage, Snackbar.LENGTH_LONG);
             snackbar.setBackgroundTint(ContextCompat.getColor(this, R.color.toolbarTheme));
@@ -229,15 +230,16 @@ public class TopicSelection extends AppCompatActivity implements TopicClickListe
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(TopicSelection.this, "Failed to fetch questions.", Toast.LENGTH_SHORT).show();
+                            String fetchQuestionError = getResources().getString(R.string.fetch_question_error);
+                            Toast.makeText(TopicSelection.this, fetchQuestionError, Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(TopicSelection.this, "Failed to fetch questions.", Toast.LENGTH_SHORT).show();
+                        String fetchQuestionError = getResources().getString(R.string.fetch_question_error);
+                        Toast.makeText(TopicSelection.this, fetchQuestionError, Toast.LENGTH_SHORT).show();
                     }
                 });
 
