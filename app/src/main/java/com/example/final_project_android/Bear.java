@@ -89,20 +89,33 @@ public class Bear extends AppCompatActivity {
             if (enteredWidthStr.isEmpty() || enteredHeightStr.isEmpty()) {
                 // Show a toast message if either width or height is empty
                 Toast.makeText(this, bothDimensionsText, Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    int enteredWidth = Integer.parseInt(enteredWidthStr);
-                    int enteredHeight = Integer.parseInt(enteredHeightStr);
+            }
+            else {
+                int width = Integer.parseInt(enteredWidthStr);
+                int height = Integer.parseInt(enteredHeightStr);
 
-                    // Now you have the entered width and height, you can proceed to use them
-                    // For example, you can call your fetchBearImage() method here passing enteredWidth and enteredHeight
-                    fetchBearImage(enteredWidth, enteredHeight);
+                if (width <= 800 && height <= 800) {
+                    try {
+                        int enteredWidth = Integer.parseInt(enteredWidthStr);
+                        int enteredHeight = Integer.parseInt(enteredHeightStr);
+
+                        // Now you have the entered width and height, you can proceed to use them
+                        // For example, you can call your fetchBearImage() method here passing enteredWidth and enteredHeight
+                        fetchBearImage(enteredWidth, enteredHeight);
 
 
-                } catch (NumberFormatException e) {
-                    // Show a toast message if the user entered non-numeric values for width or height
-                    Toast.makeText(this, NumericOnlyText, Toast.LENGTH_SHORT).show();
+                    } catch (NumberFormatException e) {
+                        // Show a toast message if the user entered non-numeric values for width or height
+                        Toast.makeText(this, NumericOnlyText, Toast.LENGTH_SHORT).show();
+                    }
+                    // Both width and height are less than or equal to 500
+                    // Your code for handling this case goes here
+                } else {
+                    Toast.makeText(this, "Both height and width must be less than or equal to 800", Toast.LENGTH_LONG).show();
+                    // Either width or height is greater than 500
+                    // Handle this case as needed
                 }
+
             }
 
 
