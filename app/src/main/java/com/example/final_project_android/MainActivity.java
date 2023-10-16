@@ -3,9 +3,7 @@ package com.example.final_project_android;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.view.Menu;
-import android.widget.Button;
-
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,47 +25,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up the toolbar with title and subtitle
         setSupportActionBar(binding.mainToolbar);
-        getSupportActionBar().setTitle("Final Project");
-        getSupportActionBar().setSubtitle("Group work");
+        getSupportActionBar().setTitle("Sneha's Bear Image Generator");
 
-        // Set up listeners for different menu options
-        Button buttonTrivia = findViewById(R.id.trivia);
-        buttonTrivia.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, TopicSelection.class);
-            startActivity(intent);
+        binding.bearImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the opening message from resources
+                String startingMessage = getResources().getString(R.string.bear_opening_message);
+
+                // Create an intent to launch the Bear Image Generator activity
+                Intent intent = new Intent(String.valueOf(Bear.class));
+                startActivity(intent); // Start the Bear activity
+            }
         });
 
-
-        // Launch the Bear Image Generator
-        binding.bearImage.setOnClickListener(click->
-                startActivity(new Intent(this, Bear.class)));
-
-        // Launch the Flight Tracker
-        binding.flightTracker.setOnClickListener(click->
-                startActivity(new Intent(this, FlightTracker.class)));
-
-        // Launch the Trivia Game
-        binding.trivia.setOnClickListener(click->
-                startActivity(new Intent(this, TopicSelection.class)));
-
-        // Launch the Currency Converter
-        binding.currencyConverter.setOnClickListener(click->
-                startActivity(new Intent(this, CurrencyMainActivity.class)));
-
-
-
-
-        binding.bearImage.setOnClickListener(click-> {
-            // Get the opening message from resources
-            String startingMessage = getResources().getString(R.string.bear_opening_message);
-
-            // Display a toast notification with the opening message
-            Toast.makeText(this, startingMessage, Toast.LENGTH_SHORT).show();
-
-            // Create an intent to launch the Bear Image Generator activity
-            Intent intent = new Intent(MainActivity.this, Bear.class);
-            startActivity(intent); // Start the Bear activity
-        });
 
 
     }

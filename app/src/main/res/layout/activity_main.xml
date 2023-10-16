@@ -17,46 +17,16 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_main"/>
-    <Button
-        android:id="@+id/flight_tracker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/flight_tracker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainToolbar" />
-
-    <Button
-        android:id="@+id/currency_converter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/currency_converter"
-        app:layout_constraintEnd_toEndOf="@+id/flight_tracker"
-        app:layout_constraintStart_toStartOf="@+id/flight_tracker"
-        app:layout_constraintTop_toBottomOf="@+id/flight_tracker" />
-
-    <Button
-        android:id="@+id/trivia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/trivia"
-        app:layout_constraintEnd_toEndOf="@+id/currency_converter"
-        app:layout_constraintStart_toStartOf="@+id/currency_converter"
-        app:layout_constraintTop_toBottomOf="@+id/currency_converter" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/bear_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/bear_image"
-        app:layout_constraintEnd_toEndOf="@+id/trivia"
-        app:layout_constraintStart_toStartOf="@+id/trivia"
-        app:layout_constraintTop_toBottomOf="@+id/trivia" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainToolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

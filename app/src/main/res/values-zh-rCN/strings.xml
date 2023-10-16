@@ -14,16 +14,10 @@
     <string name="generate_new_image_text">生成新图片</string>
     <string name="width_hint">输入宽度</string>
     <string name="height_hint">输入高度</string>
-    <string name="flight_tracker">航班追踪</string>
     <string name="currency_converter">货币转换</string>
     <string name="trivia">小问题数据库</string>
     <string name="bear_image">小熊图像生成器</string>
-    <string name="airport_hint">请输入机场代码</string>
-    <string name="delete_button">从数据库中删除</string>
-    <string name="search_button">搜索</string>
-    <string name="list_button">列出已存航班</string>
-    <string name="save_button">保存至数据库</string>
-    <string name="enter_text">请输入机场代码</string>
+
     <string name="actionbar_subtitle_saved_images">保存的图像</string>
     <string name="width_header_text">宽度</string>
     <string name="height_header_text">高度</string>
@@ -34,36 +28,6 @@
     <string name="how_to_use">如何使用</string>
     <string name="how_to_use_help">长按图像将其删除，然后单击查看其尺寸</string>
     <string name="help_menu_item">帮助</string>
-    <string name="trivia_actionbar_title">琐事问题数据库</string>
-    <string name="trivia_subtitle">主题</string>
-    <string name="percentage_string">百分比</string>
-    <string name="history_title">历史</string>
-    <string name="science_title">科学</string>
-    <string name="sports_title">运动的</string>
-    <string name="geography_title">地理</string>
-    <string name="mythology_title">神话</string>
-    <string name="history_subtitle">测试你对历史事件的了解</string>
-    <string name="science_subtitle">探索与科学世界相关的问题。</string>
-    <string name="sports_subtitle">测试您的运动知识</string>
-    <string name="geography_subtitle">研究人与环境之间的关系</string>
-    <string name="mythology_subtitle">测试你对神话的了解</string>
 
-    <string name="flight_help">帮助</string>
-    <string name="flight_instructions">使用指导</string>
-    <string name="flight_barTitle">航班追踪</string>
-    <string name="flight_saved">您保存了此航班</string>
-    <string name="flight_deleted">您删除了此航班 #</string>
-    <string name="flight_undo">撤销</string>
-    <string name="flight_yes">是</string>
-    <string name="flight_no">否</string>
-    <string name="flight_alertTitle">问题</string>
-    <string name="flight_alertMsg">您确定删除此航班吗？</string>
-    <string name="flight_ok">好的</string>
-    <string name="flight_failedconn">连接失败</string>
-
-    <string name="enter_number_of_ques">输入问题数量</string>
-    <string name="topicSelection_help">选择一个主题，然后提供问题数量</string>
-    <string name="fetch_question_error">无法获取问题。</string>
-    <string name="topPlayers_help_message">此页面显示顶级玩家</string>
 
 </resources>

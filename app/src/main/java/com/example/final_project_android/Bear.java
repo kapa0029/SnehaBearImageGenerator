@@ -1,5 +1,4 @@
 package com.example.final_project_android;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -79,47 +78,38 @@ public class Bear extends AppCompatActivity {
 
         // Set up onClickListener for "Generate" button
         binding.generate.setOnClickListener(view -> {
-
             saveUserInputs();
 
             String enteredWidthStr = binding.widthTextField.getText().toString();
             String enteredHeightStr = binding.heightTextField.getText().toString();
             String bothDimensionsText = getResources().getString(R.string.width_height_text);
             String NumericOnlyText = getResources().getString(R.string.valid_values_text);
+
             if (enteredWidthStr.isEmpty() || enteredHeightStr.isEmpty()) {
                 // Show a toast message if either width or height is empty
                 Toast.makeText(this, bothDimensionsText, Toast.LENGTH_SHORT).show();
-            }
-            else {
-                int width = Integer.parseInt(enteredWidthStr);
-                int height = Integer.parseInt(enteredHeightStr);
+            } else {
+                if (isNumeric(enteredWidthStr) && isNumeric(enteredHeightStr)) {
+                    int enteredWidth = Integer.parseInt(enteredWidthStr);
+                    int enteredHeight = Integer.parseInt(enteredHeightStr);
 
-                if (width <= 800 && height <= 800) {
-                    try {
-                        int enteredWidth = Integer.parseInt(enteredWidthStr);
-                        int enteredHeight = Integer.parseInt(enteredHeightStr);
-
+                    if (enteredWidth <= 800 && enteredHeight <= 800) {
                         // Now you have the entered width and height, you can proceed to use them
                         // For example, you can call your fetchBearImage() method here passing enteredWidth and enteredHeight
                         fetchBearImage(enteredWidth, enteredHeight);
-
-
-                    } catch (NumberFormatException e) {
-                        // Show a toast message if the user entered non-numeric values for width or height
-                        Toast.makeText(this, NumericOnlyText, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Both height and width must be less than or equal to 800", Toast.LENGTH_LONG).show();
+                        // Either width or height is greater than 800
+                        // Handle this case as needed
                     }
-                    // Both width and height are less than or equal to 500
-                    // Your code for handling this case goes here
                 } else {
-                    Toast.makeText(this, "Both height and width must be less than or equal to 800", Toast.LENGTH_LONG).show();
-                    // Either width or height is greater than 500
-                    // Handle this case as needed
+                    Toast.makeText(this, NumericOnlyText, Toast.LENGTH_SHORT).show();
                 }
-
             }
-
-
         });
+
+
+
 
         // Set up onClickListener for "View Images" button
         binding.viewImageButton.setOnClickListener(view->{
@@ -130,6 +120,14 @@ public class Bear extends AppCompatActivity {
         });
 
 
+    }
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
     /**
      * Fetches a bear image from the URL based on the provided width and height.
@@ -234,23 +232,9 @@ private void fetchBearImage(int width, int height) {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.helpBear) {
-            showHelpSnackbar();
-            return true;
-        }
-        else if (id == R.id.item_currency) {
-            startActivity(new Intent(this, CurrencyMainActivity.class));
-        }
-        else if (id == R.id.item_flight) {
-            startActivity(new Intent(this, FlightTracker.class));
-        }
-        else if (item.getItemId() == R.id.item_trivia) {
-
-            startActivity(new Intent(this, TopicSelection.class));
-
-        }
+        showHelpSnackbar();
         return super.onOptionsItemSelected(item);
+
     }
     /**
      * Inflates the options menu.
@@ -258,6 +242,7 @@ private void fetchBearImage(int width, int height) {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_bear, menu);
+        showHelpSnackbar();
         return true;
     }
     /**  Shows a Snackbar with help instructions.    */

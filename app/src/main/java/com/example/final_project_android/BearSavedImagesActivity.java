@@ -122,17 +122,7 @@ public class BearSavedImagesActivity extends AppCompatActivity implements MyBear
             showAlertDialog();
             return true;
         }
-        else if (id == R.id.item_currency) {
-            startActivity(new Intent(this, CurrencyMainActivity.class));
-        }
-        else if (id == R.id.item_flight) {
-            startActivity(new Intent(this, FlightTracker.class));
-        }
-        else if (item.getItemId() == R.id.item_trivia) {
 
-            startActivity(new Intent(this, TopicSelection.class));
-
-        }
         return super.onOptionsItemSelected(item);
     }
     /**

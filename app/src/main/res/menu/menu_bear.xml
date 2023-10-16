@@ -8,23 +8,10 @@
 <!--        android:icon="@drawable/help_bear"-->
 <!--        />-->
 
-    <item
-        android:id="@+id/item_trivia"
-        android:icon="@drawable/toolbar_trivia"
-        android:title="Go to Trivia Question"
-        app:showAsAction="always"/>
 
-    <item
-        android:id="@+id/item_flight"
-        android:icon="@drawable/toolbar_flight"
-        android:title="Go to Bear Generator"
-        app:showAsAction="always"/>
 
-    <item
-        android:id="@+id/item_currency"
-        android:icon="@drawable/toolbar_currency"
-        android:title="Go to Currency Converter"
-        app:showAsAction="always"/>
+
+
 
     <item
         android:id="@+id/helpBear"

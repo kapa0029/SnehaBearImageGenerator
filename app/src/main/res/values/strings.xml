@@ -1,28 +1,8 @@
 <resources>
-    <string name="app_name">Final_Project_Android</string>
+    <string name="app_name">Sneha\'s Bear Image Generator</string>
     <string name="currency_converter">Go to Currency Converter</string>
     <string name="trivia">Go to Trivia Question Database</string>
     <string name="bear_image">Go to Bear Image Generator</string>
-
-    <string name="enter_text">Enter the airport code</string>
-    <string name="airport_hint">Type airport code here</string>
-    <string name="delete_button">DELETE FROM DATABASE</string>
-    <string name="search_button">SEARCH</string>
-    <string name="list_button">LIST</string>
-    <string name="save_button">SAVE TO DATABASE</string>
-    <string name="flight_help">Help</string>
-    <string name="flight_instructions">Instructions: </string>
-    <string name="flight_barTitle">Flight Tracker</string>
-    <string name="flight_saved">You saved the flight!</string>
-    <string name="flight_deleted">You deleted flight #</string>
-    <string name="flight_undo">Undo</string>
-    <string name="flight_yes">Yes</string>
-    <string name="flight_no">No</string>
-    <string name="flight_ok">OK</string>
-    <string name="flight_alertTitle">Question:</string>
-    <string name="flight_alertMsg">Do you want to delete the flight?</string>
-    <string name="flight_failedconn">Connection Failed</string>
-  
    <string name="width_height_text">Please enter both width and height</string>
     <string name="valid_values_text">Please enter valid numeric values for width and height</string>
     <string name="fetch_bear_image_error">Error fetching bear image</string>
@@ -37,35 +17,10 @@
     <string name="height_header_text">Height</string>
     <string name="view_saved_images_text">View saved images</string>
     <string name="actionbar_subtitle_saved_images">Saved Images</string>
-    <string name="flight_tracker">Go to Aviation Stack Flight Tracker</string>
     <string name="alert_title_delete_image">Delete Image</string>
     <string name="alert_subtitle_delete_image">Are you sure you want to delete this image?</string>
     <string name="image_deleted_text">Image Deleted</string>
     <string name="how_to_use">HOW TO USE</string>
     <string name="how_to_use_help">Long click on an image to delete it and click to see its dimensions</string>
     <string name="help_menu_item">Help</string>
-
-
-
-
-    <string name="trivia_actionbar_title">Trivia Question Database</string>
-    <string name="trivia_subtitle">Topics</string>
-    <string name="percentage_string">percentage</string>
-    <string name="history_title">History</string>
-    <string name="science_title">Science</string>
-    <string name="sports_title">Sports</string>
-    <string name="geography_title">Geography</string>
-    <string name="mythology_title">Mythology</string>
-    <string name="history_subtitle">Test your knowledge of historical events</string>
-    <string name="science_subtitle">Explore questions related to the scientific world.</string>
-    <string name="sports_subtitle">Test Your Knowledge on sports</string>
-    <string name="geography_subtitle">Study the relationship between people and their environmnet</string>
-    <string name="mythology_subtitle">Test Your Knowledge of mytho</string>
-
-
-
-    <string name="topPlayers_help_message">This page displays the top players</string>
-    <string name="enter_number_of_ques">Enter number of questions</string>
-    <string name="topicSelection_help">Choose a topic and then provide the number of questions</string>
-    <string name="fetch_question_error">Failed to fetch questions.</string>
 </resources>
