@@ -3,8 +3,6 @@ package com.example.final_project_android;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,16 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.mainToolbar);
         getSupportActionBar().setTitle("Sneha's Bear Image Generator");
 
-        binding.bearImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the opening message from resources
-                String startingMessage = getResources().getString(R.string.bear_opening_message);
+        binding.bearImage.setOnClickListener(view -> {
 
-                // Create an intent to launch the Bear Image Generator activity
-                Intent intent = new Intent(String.valueOf(Bear.class));
-                startActivity(intent); // Start the Bear activity
-            }
+            // Create an intent to launch the Bear Image Generator activity
+            Intent intent = new Intent(String.valueOf(Bear.class));
+            startActivity(intent); // Start the Bear activity
         });
 
 
